@@ -1,0 +1,38 @@
+{
+  "date": "2026-06-12",
+  "dateLabel": "Freitag, 12. Juni 2026",
+  "generated": "2026-06-12T11:39:18+02:00",
+  "pdf": "./data/news-latest.pdf",
+  "changes_since_yesterday": [
+    "Dies ist die erste Ausgabe des Tagesüberblicks – es existiert noch keine Vorversion von data/news.json, daher ist kein direkter Vergleich zu 'gestern' möglich.",
+    "Neu seit gestern: Die EZB hat erstmals seit September 2023 ihren Leitzins angehoben, auf 2,25 Prozent.",
+    "Neu seit gestern: Die europäische Asylreform (GEAS) ist heute EU-weit in Kraft getreten.",
+    "Neu seit gestern: Die Fußball-WM 2026 hat mit dem Eröffnungsspiel Mexiko gegen Südafrika begonnen, heute folgte bereits das zweite Spiel der Gruppe A."
+  ],
+  "sections": [
+    {
+      "title": "Welt & Politik",
+      "body": "USA und Iran ringen weiter um ein endgültiges Abkommen, das den seit Februar 2026 schwelenden Krieg beenden soll – damals hatten die USA und Israel mit der Operation „Epic Fury“ Luftangriffe auf iranische Atom- und Militäranlagen geflogen, bei denen auch Revolutionsführer Ali Khamenei getötet wurde. Nach einem Waffenstillstand im April einigten sich beide Seiten vergangene Woche auf ein vorläufiges Rahmenabkommen, das die Feuerpause um 60 Tage verlängert; US-Präsident Trump verlangt, dass der Iran dauerhaft auf Atomwaffen verzichtet und die für rund ein Fünftel des weltweiten Ölhandels wichtige Straße von Hormus wieder vollständig öffnet. Der iranische Außenamtssprecher Esmail Baghai sprach von einem weitgehend fertigen Vertragstext, beklagte aber fehlendes Vertrauen in US-Zusagen – Washington betont zugleich, jederzeit zum Krieg zurückkehren zu können, falls die Verhandlungen scheitern."
+    },
+    {
+      "title": "Deutschland",
+      "body": "Heute tritt die neue europäische Asylreform (GEAS, Gemeinsames Europäisches Asylsystem) EU-weit in Kraft: Asylverfahren sollen dadurch schneller, einheitlicher und fairer ablaufen, Mehrfachanträge in verschiedenen Mitgliedstaaten verhindert und die Kommunen entlastet werden. Bundeskanzler Friedrich Merz würdigte den Schritt in einer Regierungserklärung als zentralen Baustein seiner Reformagenda für Migration und Europa. Parallel berät der Bundesrat heute über rund zwei Dutzend Gesetze, darunter die elektronische Fußfessel im Gewaltschutzgesetz zum besseren Schutz vor gewalttätigen (Ex-)Partnern sowie eine Apothekenreform, die die wirtschaftliche Lage inhabergeführter Apotheken verbessern soll."
+    },
+    {
+      "title": "Wirtschaft & Finanzen",
+      "body": "Die Europäische Zentralbank (EZB) hat ihren Leitzins am Donnerstag um 0,25 Prozentpunkte auf 2,25 Prozent angehoben – die erste Zinserhöhung seit September 2023 und laut Präsidentin Christine Lagarde eine „einstimmige Entscheidung ohne Vorbehalte“. Grund ist die Sorge vor stärker steigenden Preisen: Die EZB hat ihre Inflationsprognose für 2026 von 2,6 auf 3,0 Prozent angehoben, auch wegen höherer Ölpreise infolge der Hormus-Krise; in den USA lag die Inflation im Mai bei 4,2 Prozent und damit weiterhin deutlich über dem 2-Prozent-Ziel der US-Notenbank Fed. An den Börsen überwog am Donnerstag dennoch Erleichterung, weil Präsident Trump angekündigte Luftangriffe auf den Iran wegen guter Gespräche mit der iranischen Führung absagte: Der Dow Jones legte um 1,85 Prozent auf 50.841 Punkte zu, und auch der DAX (rund 24.200 Punkte) startete am Freitag fester."
+    },
+    {
+      "title": "Business News",
+      "body": "Chinas Wirtschaftsbehörde NDRC hat die geplante Übernahme des chinesischen KI-Start-ups Manus durch den US-Konzern Meta (Facebook, Instagram, WhatsApp) unter Verweis auf nationale Investitionsregeln blockiert – ein Zeichen dafür, wie stark geopolitische Spannungen inzwischen auch große Tech-Deals beeinflussen. Meta selbst meldete für das erste Quartal 2026 einen Umsatz von 56,3 Milliarden US-Dollar, ein Plus von 33 Prozent gegenüber dem Vorjahr. Im Gesundheitsmarkt hat die Telemedizin-Plattform Hims & Hers ihre Anfang Juni abgeschlossene Übernahme der australischen Eucalyptus-Gruppe vollzogen und gewinnt dadurch mehr als 850.000 neue Kundinnen und Kunden."
+    },
+    {
+      "title": "Tech & KI",
+      "body": "Anthropic, das Unternehmen hinter dem KI-Assistenten Claude, hat am 1. Juni 2026 vertraulich einen Börsengangsantrag bei der US-Börsenaufsicht SEC eingereicht und peilt für Herbst 2026 ein Listing an der Nasdaq an. Nach einer Serie-H-Finanzierungsrunde Ende Mai über 65 Milliarden Dollar (mit Investoren wie Amazon, Nvidia, Microsoft und Sequoia) wird das Unternehmen mit rund 965 Milliarden Dollar bewertet und strebt für den Börsengang eine Bewertung von 1,1 bis 1,25 Billionen Dollar an. Der Schritt fällt nahezu zeitgleich mit den IPO-Plänen des Rivalen OpenAI und markiert damit einen historischen Moment für die KI-Branche, deren führende Anbieter nun den Sprung an die Börse wagen."
+    },
+    {
+      "title": "Sport",
+      "body": "Bei der Fußball-Weltmeisterschaft 2026 in den USA, Mexiko und Kanada gewann Südkorea am heutigen Freitagmorgen sein Auftaktspiel der Gruppe A gegen Tschechien mit 2:1. Das eigentliche Eröffnungsspiel des Turniers hatte Co-Gastgeber Mexiko mit 2:0 gegen Südafrika gewonnen – mit Toren von Julián Quiñones und Raúl Jiménez sowie rekordverdächtigen drei Platzverweisen für ein WM-Eröffnungsspiel. Am Abend (21 Uhr, live in der ARD) trifft der dritte Co-Gastgeber Kanada in der Gruppe B auf Bosnien-Herzegowina."
+    }
+  ]
+}
