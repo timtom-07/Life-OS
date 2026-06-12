@@ -751,6 +751,14 @@ button { cursor: pointer; background: none; border: none; }
 
 @media (max-width: 900px) { .dashboard-grid { grid-template-columns: 1fr; } }
 
+/* Bucketlisten (1fr) links | Stimmung (1.4fr, = Heute-Breite) rechts */
+.dashboard-grid-rev { grid-template-columns: 1fr 1.4fr; align-items: stretch; }
+@media (max-width: 900px) { .dashboard-grid-rev { grid-template-columns: 1fr; } }
+.dash-bucketlists { display: flex; flex-direction: column; min-height: 0; align-self: start; }
+.dash-bucketlists #dashBucketlistsList { flex: 1 1 0; overflow-y: auto; min-height: 0; }
+.dash-bucketlists #dashBucketlistsList::-webkit-scrollbar { width: 6px; }
+.dash-bucketlists #dashBucketlistsList::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
 .card {
   background: var(--bg-card);
   border: 1px solid var(--line-soft);
@@ -5265,8 +5273,8 @@ button { cursor: pointer; background: none; border: none; }
           <div class="stat-label">Erledigt heute</div>
         </div>
         <div class="stat">
-          <div class="stat-value" id="statTotalDone">0</div>
-          <div class="stat-label">Gesamt erledigt</div>
+          <div class="stat-value" id="statVocOpen">0</div>
+          <div class="stat-label">Vokabeln offen</div>
         </div>
         <div class="stat">
           <div class="stat-value" id="statStreak">0</div>
@@ -5307,17 +5315,7 @@ button { cursor: pointer; background: none; border: none; }
         </div>
       </div>
 
-      <!-- Mood card -->
-      <div class="card dash-block" style="margin-top:20px;">
-        <span class="save-dot" id="moodSaveDot"></span>
-        <div class="card-header">
-          <h2 class="card-title">Wie fühlst du dich heute?</h2>
-          <div class="card-meta">Klick auf die Balken</div>
-        </div>
-        <div id="moodQuick"></div>
-      </div>
-
-      <!-- Fitness-Widget (Phase 3a) -->
+      <!-- Training (Phase 3a) -->
       <div class="dash-fit-card" id="dashFitCard" style="margin-top:20px;">
         <div class="card-header">
           <h2 class="card-title">Training</h2>
@@ -5326,23 +5324,33 @@ button { cursor: pointer; background: none; border: none; }
         <div id="dashFitBody"></div>
       </div>
 
-      <div class="dash-fit-card" id="dashFinCard" style="margin-top:20px;">
-        <div class="card-header">
-          <h2 class="card-title">Finanzen</h2>
-          <a class="card-meta" style="color:var(--accent); cursor:pointer;" onclick="navigate('finance', {finTab:'overview'})">Übersicht →</a>
-        </div>
-        <div id="dashFinBody"></div>
-      </div>
-
-      <!-- Bucketlist-Übersicht -->
-      <div class="dash-life-row">
-        <div class="dash-life-card dash-bucketlists">
+      <!-- Bucketlisten (links, scrollbar) + Stimmung (rechts, Heute-Breite) -->
+      <div class="dashboard-grid dashboard-grid-rev" style="margin-top:20px;">
+        <div class="dash-life-card dash-bucketlists" id="dashBucketCard">
           <div class="card-header">
             <h2 class="card-title">Bucketlisten</h2>
             <a class="card-meta" style="color:var(--accent); cursor:pointer;" onclick="navigate('lifestyle'); setTimeout(() => switchLifeTab('bucket'), 80);">Alle →</a>
           </div>
           <div id="dashBucketlistsList"></div>
         </div>
+
+        <div class="card dash-block" id="dashMoodCard" style="margin-top:0;">
+          <span class="save-dot" id="moodSaveDot"></span>
+          <div class="card-header">
+            <h2 class="card-title">Wie fühlst du dich heute?</h2>
+            <a class="card-meta" style="color:var(--accent); cursor:pointer;" onclick="navigate('reflexion')">Reflexion →</a>
+          </div>
+          <div id="moodQuick"></div>
+        </div>
+      </div>
+
+      <!-- Finanzen (volle Breite) -->
+      <div class="dash-fit-card" id="dashFinCard" style="margin-top:20px;">
+        <div class="card-header">
+          <h2 class="card-title">Finanzen</h2>
+          <a class="card-meta" style="color:var(--accent); cursor:pointer;" onclick="navigate('finance', {finTab:'overview'})">Übersicht →</a>
+        </div>
+        <div id="dashFinBody"></div>
       </div>
     </section>
 
@@ -5500,6 +5508,12 @@ button { cursor: pointer; background: none; border: none; }
           </select>
           <select id="expTagFilter" onchange="renderExperiences()" style="padding:8px 12px; border:1px solid var(--line); border-radius:var(--radius); background:var(--bg-card); font-size:13px;">
             <option value="">Alle Tags</option>
+          </select>
+          <select id="expTimeFilter" onchange="renderExperiences()" style="padding:8px 12px; border:1px solid var(--line); border-radius:var(--radius); background:var(--bg-card); font-size:13px;">
+            <option value="">Gesamt</option>
+            <option value="month">Diesen Monat</option>
+            <option value="year">Dieses Jahr</option>
+            <option value="lastyear">Letztes Jahr</option>
           </select>
           <button class="btn btn-primary" style="margin-left:auto;" onclick="openExpModal()">+ Neues Erlebnis</button>
         </div>
@@ -5767,10 +5781,10 @@ button { cursor: pointer; background: none; border: none; }
       <!-- Tabs -->
       <div class="pill-tabs" id="fitTabs">
         <button class="pill-tab active" data-ftab="verlauf">Verlauf</button>
-        <button class="pill-tab" data-ftab="log">Einträge <span class="count" id="fitCountLog">0</span></button>
+        <button class="pill-tab" data-ftab="log">Einträge</button>
         <button class="pill-tab" data-ftab="goals">Ziele <span class="count" id="fitCountGoals">0</span></button>
-        <button class="pill-tab" data-ftab="records">Rekorde <span class="count" id="fitCountRecords">0</span></button>
-        <button class="pill-tab" data-ftab="body">Körperdaten <span class="count" id="fitCountBody">0</span></button>
+        <button class="pill-tab" data-ftab="records">Rekorde</button>
+        <button class="pill-tab" data-ftab="body">Körperdaten</button>
       </div>
 
       <!-- VERLAUF TAB -->
@@ -5778,8 +5792,8 @@ button { cursor: pointer; background: none; border: none; }
         <div id="fitInsights" class="fit-insights"></div>
         <div class="fit-period" id="fitPeriod">
           <button class="chip" data-fperiod="week">Woche</button>
-          <button class="chip" data-fperiod="month">Monat</button>
-          <button class="chip active" data-fperiod="year">Jahr</button>
+          <button class="chip active" data-fperiod="month">Monat</button>
+          <button class="chip" data-fperiod="year">Jahr</button>
           <button class="chip" data-fperiod="all">Gesamt</button>
         </div>
         <div id="fitConsistency" class="fit-consistency"></div>
@@ -7409,12 +7423,11 @@ async function renderDashboard() {
   const todayTasks = allTasks.filter(t => (t.dueDate === today) || (!t.dueDate && !t.done));
   const openToday = todayTasks.filter(t => !t.done).length;
   const doneToday = allTasks.filter(t => t.done && t.completedAt && t.completedAt.startsWith(today)).length;
-  const totalDone = allTasks.filter(t => t.done).length;
   const overdueCount = allTasks.filter(isOverdue).length;
 
   document.getElementById('statOpen').textContent = openToday;
   document.getElementById('statDone').textContent = doneToday;
-  document.getElementById('statTotalDone').textContent = totalDone;
+  if (window.vocOpenCount) { try { const vo = await window.vocOpenCount(); const el = document.getElementById('statVocOpen'); if (el) el.textContent = vo; } catch(e){} }
 
   // Sidebar: today only count (hidden when 0)
   const navTaskCount = document.getElementById('navTaskCount');
@@ -9774,7 +9787,7 @@ async function renderLifeTabsCounts() {
   ]);
   document.getElementById('lifeCountGoals').textContent = goals.length;
   document.getElementById('lifeCountTravels').textContent = travels.length;
-  document.getElementById('lifeCountCD').textContent = cds.length;
+  document.getElementById('lifeCountCD').textContent = cds.filter(c => !cdIsExpiredOrArchived(c)).length;
 }
 
 /* ---------- GOALS ---------- */
@@ -10567,6 +10580,7 @@ async function renderExperiences() {
   const cnt = document.getElementById('reflCountExp'); if (cnt) cnt.textContent = all.length;
   const search = (document.getElementById('expSearch').value || '').trim().toLowerCase();
   const flagFilter = document.getElementById('expFlagFilter').value;
+  const timeF = (document.getElementById('expTimeFilter') || {}).value || '';
   // Tag filter — auto-populated from all used tags, selection preserved
   const tagSel = document.getElementById('expTagFilter');
   let tagF = '';
@@ -10587,6 +10601,17 @@ async function renderExperiences() {
   }
   if (flagFilter) filtered = filtered.filter(e => e.flag === flagFilter);
   if (tagF) filtered = filtered.filter(e => (e.tags || []).includes(tagF));
+  if (timeF) {
+    const now = new Date(); const y = now.getFullYear();
+    const ym = y + '-' + String(now.getMonth() + 1).padStart(2, '0');
+    filtered = filtered.filter(e => {
+      const d = e.date || '';
+      if (timeF === 'month') return d.slice(0, 7) === ym;
+      if (timeF === 'year') return d.slice(0, 4) === String(y);
+      if (timeF === 'lastyear') return d.slice(0, 4) === String(y - 1);
+      return true;
+    });
+  }
 
   // Sort newest first
   filtered.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
@@ -11067,11 +11092,17 @@ let _dashHeightObserver = null;
 function syncDashboardCardHeights() {
   const heute = document.querySelector('#view-dashboard .card.feature');
   const cd    = document.querySelector('#view-dashboard .card-countdowns');
-  if (!heute || !cd) return;
-  // If the dashboard is hidden, offsetHeight is 0 → don't apply (we'd zero out CD)
-  if (heute.offsetParent === null) return;
-  const h = heute.offsetHeight;
-  if (h > 0) cd.style.height = h + 'px';
+  if (heute && cd && heute.offsetParent !== null) {
+    const h = heute.offsetHeight;
+    if (h > 0) cd.style.height = h + 'px';
+  }
+  // Bucketlisten an die Höhe der Stimmungs-Karte angleichen → scrollt bei Überlänge
+  const mood = document.getElementById('dashMoodCard');
+  const buck = document.getElementById('dashBucketCard');
+  if (mood && buck && mood.offsetParent !== null) {
+    const mh = mood.offsetHeight;
+    if (mh > 0) buck.style.height = mh + 'px';
+  }
 }
 
 function setupDashboardHeightSync() {
@@ -11084,6 +11115,8 @@ function setupDashboardHeightSync() {
   if (typeof ResizeObserver !== 'undefined' && !_dashHeightObserver) {
     _dashHeightObserver = new ResizeObserver(syncDashboardCardHeights);
     _dashHeightObserver.observe(heute);
+    const mood = document.getElementById('dashMoodCard');
+    if (mood) _dashHeightObserver.observe(mood);
   }
   // Safety net for older browsers
   window.addEventListener('resize', syncDashboardCardHeights);
@@ -11108,7 +11141,7 @@ const DEFAULT_SPORTS = [
 ];
 const FIT_PALETTE = ['#9C4221','#5C8C4D','#5F7A8F','#3F8C9C','#B89A3A','#B84450','#7A6E8F','#A0703F'];
 
-let fitnessState = { currentTab: 'verlauf', period: 'year', logPeriod: 'all', goalFilter: 'all', goalSort: 'soonest', editingId: null };
+let fitnessState = { currentTab: 'verlauf', period: 'month', logPeriod: 'all', goalFilter: 'all', goalSort: 'soonest', editingId: null };
 
 function getSports() { return [...DEFAULT_SPORTS, ...((appState.customSports) || [])]; }
 function sportLabel(key) { const s = getSports().find(x => x.key === key); return s ? s.label : (key || '—'); }
@@ -11430,10 +11463,7 @@ function setFitLogPeriod(p) {
 async function renderFitCounts() {
   const [ws, bd, gs, rc] = await Promise.all([db.getAll('workouts'), db.getAll('bodyData'), db.getAll('fitGoals'), db.getAll('fitRecords')]);
   const set = (id, v) => { const e = document.getElementById(id); if (e) e.textContent = v; };
-  set('fitCountLog', ws.length);
-  set('fitCountBody', bd.length);
   set('fitCountGoals', gs.filter(g => g.status === 'active').length);
-  set('fitCountRecords', rc.length);
 }
 
 async function renderFitStats() {
@@ -11945,7 +11975,7 @@ async function renderFinCounts() {
   const [a, c, s, b] = await Promise.all([db.getAll('accounts'), db.getAll('cashflow'), db.getAll('savingsGoals'), db.getAll('budgets')]);
   const set = (id, v) => { const e = document.getElementById(id); if (e) e.textContent = v; };
   set('finCountAccounts', a.length);
-  set('finCountCashflow', c.length);
+  set('finCountCashflow', c.filter(x => x.rhythm === 'monthly').length);
   set('finCountSavings', s.length);
   set('finCountBudgets', b.length);
 }
@@ -14083,7 +14113,7 @@ function bodyAxisTicks(start, end, period) {
     const el = document.getElementById("agVocStats"); if (!el) return;
     const words = vocAllWords(); const prog = vocLoadProg();
     let learned=0, due=0;
-    words.forEach(function (w) { const e=prog[w.key]; if(e&&e.learned){learned++;return;} if(vocDue(e)) due++; });
+    words.forEach(function (w) { const e=prog[w.key]; if(boxOf(e)>=1){ learned++; if(vocDue(e)) due++; } });
     const days = AG.voc ? AG.voc.days.length : 0;
     el.innerHTML = '<div class="ag-voc-statrow">' +
       '<div class="ag-voc-stat"><div class="num">'+words.length+'</div><div class="lbl">Vokabeln gesamt</div></div>' +
@@ -14316,8 +14346,10 @@ function bodyAxisTicks(start, end, period) {
   function setLearned(key, val) {
     const prog = vocLoadProg();
     const e = prog[key] || { box:1, correct:0, wrong:0, seen:0, learned:false };
+    const wasUntouched = boxOf(e) === 0;
     const was = !!e.learned; e.learned = val;
     if (val && !was) e.learnedAt = todayISO();
+    if (val && wasUntouched && !e.firstAt) e.firstAt = todayISO();
     if (!val) delete e.learnedAt;
     prog[key] = e; vocSaveProg(prog);
   }
@@ -14491,6 +14523,7 @@ function bodyAxisTicks(start, end, period) {
     e.seen = (e.seen||0)+1; e.last = todayISO();
     if (wasUntouched) {
       e.box = 1; // erstes Lernen -> Box 1, egal ob richtig oder falsch
+      if (!e.firstAt) e.firstAt = todayISO();
       if (ok) { e.correct = (e.correct||0)+1; q.correct++; }
       else    { e.wrong   = (e.wrong||0)+1;   q.wrong++; }
     } else if (ok) {
@@ -14520,7 +14553,12 @@ function bodyAxisTicks(start, end, period) {
      =================================================================== */
   function learnedByDay() {
     const prog = vocLoadProg(); const map = {};
-    Object.keys(prog).forEach(function (k) { const e = prog[k]; if (e && e.learned && e.learnedAt) map[e.learnedAt] = (map[e.learnedAt]||0) + 1; });
+    Object.keys(prog).forEach(function (k) {
+      const e = prog[k];
+      if (!e || boxOf(e) < 1) return;                 // nur Wörter, die "Neu" verlassen haben
+      const d = e.firstAt || e.learnedAt || e.last;    // Tag des ersten Lernens (Fallback für Altdaten)
+      if (d) map[d] = (map[d]||0) + 1;
+    });
     return map;
   }
   function firstLearnedISO() {
@@ -14590,12 +14628,33 @@ function bodyAxisTicks(start, end, period) {
     return '<svg class="fit-svg" viewBox="0 0 '+W+" "+H+'" role="img" aria-label="Kumuliert gelernt">'+grid+'<path class="fit-area" d="'+area+'"/><path class="fit-line" d="'+d+'"/>'+labels+"</svg>";
   }
 
+  function vocStreak() {
+    const map = learnedByDay();
+    let d = new Date(); d.setHours(0,0,0,0);
+    if (!map[isoOf(d)]) { d = addDays(d,-1); if (!map[isoOf(d)]) return 0; }
+    let streak = 0;
+    while (map[isoOf(d)]) { streak++; d = addDays(d,-1); }
+    return streak;
+  }
+  function vocKpis() {
+    const prog = vocLoadProg(); const words = vocAllWords();
+    let mastered=0, correct=0, wrong=0, seen=0;
+    words.forEach(function (w){ const e=prog[w.key]; if(!e) return; if(boxOf(e)===5) mastered++; correct+=(e.correct||0); wrong+=(e.wrong||0); seen+=(e.seen||0); });
+    return { mastered: mastered, acc: (correct+wrong)>0 ? Math.round(100*correct/(correct+wrong)) : 0, hasReviews: (correct+wrong)>0, seen: seen, streak: vocStreak() };
+  }
   function renderVocStatistik() {
     const root = document.getElementById("agVocStatistik"); if (!root) return;
     const series = statSeries(AG.statPeriod);
     const totalLearned = series.length ? series[series.length-1].cum : 0;
     const periods = [["week","Woche"],["month","Monat"],["year","Jahr"],["all","Gesamt"]];
     let html = '<div class="fit-period" id="agStatPeriod">' + periods.map(function (p){ return '<button class="chip'+(AG.statPeriod===p[0]?" active":"")+'" data-statp="'+p[0]+'">'+p[1]+"</button>"; }).join("") + "</div>";
+    const k = vocKpis();
+    html += '<div class="ag-voc-statrow" style="margin:6px 0 16px;">' +
+      '<div class="ag-voc-stat"><div class="num"><em>'+k.streak+'</em></div><div class="lbl">Lernserie (Tage)</div></div>' +
+      '<div class="ag-voc-stat"><div class="num">'+k.mastered+'</div><div class="lbl">Gemeistert (Box 5)</div></div>' +
+      '<div class="ag-voc-stat"><div class="num">'+(k.hasReviews?k.acc+"\u00A0%":"\u2013")+'</div><div class="lbl">Trefferquote</div></div>' +
+      '<div class="ag-voc-stat"><div class="num">'+k.seen+'</div><div class="lbl">Wiederholungen</div></div>' +
+      "</div>";
     html += '<div class="fit-charts">' +
       '<div class="fit-panel"><div class="fit-panel-head"><span class="fit-panel-title">Gelernt pro Tag</span><span class="fit-panel-meta">'+AG.statPeriod+"</span></div>"+svgBarsAg(series)+"</div>" +
       '<div class="fit-panel"><div class="fit-panel-head"><span class="fit-panel-title">Kumuliert</span><span class="fit-panel-meta">'+totalLearned+" gesamt</span></div>"+svgLineAg(series)+"</div>" +
@@ -14645,6 +14704,13 @@ function bodyAxisTicks(start, end, period) {
 
   window.renderBriefing = renderBriefing;
   window.renderVokabeln = renderVokabeln;
+  window.vocOpenCount = async function () {
+    if (!AG.voc) AG.voc = await agFetchJSON("./data/vokabeln.json", FALLBACK_VOC);
+    ensureDailyRelease();
+    const prog = vocLoadProg(); const rel = vocReleasedSet(); let open = 0;
+    vocAllWords().forEach(function (w) { if (rel.has(w.key) && boxOf(prog[w.key]) === 0) open++; });
+    return open;
+  };
 })();
 
 (async function init() {
