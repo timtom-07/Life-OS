@@ -5122,6 +5122,12 @@ button { cursor: pointer; background: none; border: none; }
 [data-theme="dark"] .ag-src.active { border-color: var(--accent); background: var(--accent); }
 .ag-src .sl { font-size: 13px; font-weight: 500; }
 .ag-src .sc { font-family: var(--mono); font-size: 10px; opacity: 0.7; margin-top: 2px; }
+.ag-quiz-select { width: 100%; max-width: 360px; padding: 10px 13px; font-family: inherit; font-size: 14px; color: var(--ink); background: var(--bg-card); border: 1px solid var(--line); border-radius: var(--radius); cursor: pointer; transition: var(--t); }
+.ag-quiz-select:hover { border-color: var(--ink-mute); }
+.ag-quiz-select:focus { outline: none; border-color: var(--ink); }
+.ag-cal-count.queued { background: transparent; color: var(--ink-mute); border: 1px solid var(--line); }
+.ag-queue-note { font-size: 13px; color: var(--ink-mute); padding: 8px 2px 2px; line-height: 1.5; }
+.ag-row.queued { opacity: 0.6; }
 
 /* ---- Statistik: klickbare Boxen + Inspektion ---- */
 .ag-box.clickable { cursor: pointer; }
@@ -13864,6 +13870,9 @@ function bodyAxisTicks(start, end, period) {
   const VOC_PROG_KEY = "lifeos_vocab_progress";
   const BOX_DAYS = [0, 0, 1, 3, 7, 16];
   const MIX_WEIGHT = [6, 5, 4, 3, 2, 1]; // index 0=neu .. 5=Box5
+  const VOC_REL_KEY = "lifeos_vocab_release"; // freigegebene (offene) Vokabeln + letztes Freigabedatum
+  const VOC_OPEN_CAP = 100;   // max. gleichzeitig offene Vokabeln
+  const VOC_DAILY_ADD = 20;   // max. neue Freigaben pro Tag
   const AG_MONTHS = ["Januar","Februar","M\u00E4rz","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"];
   const AG_WD = ["Mo","Di","Mi","Do","Fr","Sa","So"];
 
@@ -13990,6 +13999,29 @@ function bodyAxisTicks(start, end, period) {
      =================================================================== */
   function vocLoadProg() { try { return JSON.parse(localStorage.getItem(VOC_PROG_KEY)) || {}; } catch(e){ return {}; } }
   function vocSaveProg(p) { try { localStorage.setItem(VOC_PROG_KEY, JSON.stringify(p)); } catch(e){} }
+  function vocLoadRel() { try { const r = JSON.parse(localStorage.getItem(VOC_REL_KEY)); if (r && Array.isArray(r.keys)) return { date: r.date || "", keys: r.keys }; } catch(e){} return { date:"", keys:[] }; }
+  function vocSaveRel(r) { try { localStorage.setItem(VOC_REL_KEY, JSON.stringify(r)); } catch(e){} }
+  function vocReleasedSet() { return new Set(vocLoadRel().keys); }
+  // Tägliche Freigabe: füllt "Neu/Offen" einmal pro Kalendertag um bis zu 20 auf, gedeckelt bei 100.
+  // Kein Nachrücken untertags. FIFO: älteste noch nicht freigegebene Wörter zuerst.
+  function ensureDailyRelease() {
+    const today = todayISO();
+    const rel = vocLoadRel();
+    if (rel.date === today) return;
+    const prog = vocLoadProg();
+    const relSet = new Set(rel.keys);
+    let open = 0;
+    vocAllWords().forEach(function (w) { if (relSet.has(w.key) && boxOf(prog[w.key]) === 0) open++; });
+    let toRelease = Math.min(VOC_DAILY_ADD, VOC_OPEN_CAP - open);
+    if (toRelease > 0) {
+      const ordered = vocAllWordsOldestFirst();
+      for (let i = 0; i < ordered.length && toRelease > 0; i++) {
+        const w = ordered[i];
+        if (!relSet.has(w.key) && boxOf(prog[w.key]) === 0) { relSet.add(w.key); toRelease--; }
+      }
+    }
+    rel.keys = Array.from(relSet); rel.date = today; vocSaveRel(rel);
+  }
   function vocDaysSorted() { return AG.voc ? AG.voc.days.slice().sort(function(a,b){ return b.date.localeCompare(a.date); }) : []; }
   function vocAllWords() {
     const seen = {}; const out = [];
@@ -14001,9 +14033,20 @@ function bodyAxisTicks(start, end, period) {
     });
     return out;
   }
+  function vocAllWordsOldestFirst() {
+    const seen = {}; const out = [];
+    const days = AG.voc ? AG.voc.days.slice().sort(function(a,b){ return a.date.localeCompare(b.date); }) : [];
+    days.forEach(function (day) {
+      day.words.forEach(function (w) {
+        if (seen[w.word]) return; seen[w.word] = 1;
+        out.push({ word:w.word, pos:w.pos, def:w.def, ex:w.ex, date:day.date, key:w.word });
+      });
+    });
+    return out;
+  }
   function daysSinceISO(iso) { const d=new Date(iso+"T00:00:00"); const n=new Date(); n.setHours(0,0,0,0); return Math.round((n-d)/86400000); }
   function vocDue(e) { if(!e||!e.last) return true; const box=Math.min(5,Math.max(1,e.box||1)); return daysSinceISO(e.last)>=BOX_DAYS[box]; }
-  function boxOf(e) { return (!e || !e.seen) ? 0 : Math.min(5, Math.max(1, e.box || 1)); }
+  function boxOf(e) { return (!e || (!e.seen && !e.learned)) ? 0 : Math.min(5, Math.max(1, e.box || 1)); }
   function posClass(pos) {
     const p = String(pos||"").toLowerCase();
     if (p.indexOf("verb") >= 0) return "Verb";
@@ -14022,6 +14065,7 @@ function bodyAxisTicks(start, end, period) {
 
   async function renderVokabeln() {
     if (!AG.voc) AG.voc = await agFetchJSON("./data/vokabeln.json", FALLBACK_VOC);
+    ensureDailyRelease();
     if (!AG.calView) {
       const days = vocDaysSorted();
       const latest = days.length ? days[0].date : todayISO();
@@ -14065,16 +14109,21 @@ function bodyAxisTicks(start, end, period) {
     return Object.keys(set);
   }
   function vocDayMap() {
-    const prog = vocLoadProg(); const map = {}; const seen = {};
+    const prog = vocLoadProg(); const rel = vocReleasedSet(); const map = {}; const seen = {};
     vocDaysSorted().forEach(function (day) {
       const fresh = day.words.filter(function (w) { if (seen[w.word]) return false; seen[w.word]=1; return true; });
-      const learned = fresh.filter(function (w) { return prog[w.word] && prog[w.word].learned; }).length;
-      map[day.date] = { total: fresh.length, learned: learned };
+      let open = 0, queue = 0, learned = 0;
+      fresh.forEach(function (w) {
+        if (boxOf(prog[w.word]) >= 1) learned++;
+        else if (rel.has(w.word)) open++;
+        else queue++;
+      });
+      map[day.date] = { total: fresh.length, open: open, queue: queue, learned: learned };
     });
     return map;
   }
   function vocFlipCardHTML(w, entry) {
-    const learned = entry && entry.learned;
+    const learned = boxOf(entry) >= 1;
     return '<div class="ag-flip'+(learned?" learned":"")+'" data-key="'+esc(w.word)+'">' +
       '<button class="ag-flip-mark" title="Als gelernt markieren">\u2713</button>' +
       '<div class="ag-flip-inner">' +
@@ -14087,14 +14136,9 @@ function bodyAxisTicks(start, end, period) {
      LERNEN — Kalender (offene Anzahl) + Tagesansicht (Offen / Gelernt)
      =================================================================== */
   function defaultLernDay() {
-    const prog = vocLoadProg(); const days = vocDaysSorted();
-    const seen = {}; let firstOpen = null;
-    days.forEach(function (d) {
-      const fresh = d.words.filter(function (w){ if(seen[w.word])return false; seen[w.word]=1; return true; });
-      const open = fresh.filter(function (w){ return !(prog[w.word] && prog[w.word].learned); });
-      if (open.length && !firstOpen) firstOpen = d.date;
-    });
-    return firstOpen || (days.length ? days[0].date : todayISO());
+    const map = vocDayMap(); const days = vocDaysSorted(); let pick = null;
+    days.forEach(function (d) { if (map[d.date] && map[d.date].open) pick = d.date; });
+    return pick || (days.length ? days[0].date : todayISO());
   }
   function vocCalGridHTML() {
     const v = AG.calView; const dayMap = vocDayMap();
@@ -14108,10 +14152,10 @@ function bodyAxisTicks(start, end, period) {
       const iso = v.year + "-" + String(v.month+1).padStart(2,"0") + "-" + String(d).padStart(2,"0");
       const info = dayMap[iso]; let cls = "cal-day"; let badge = "";
       if (info && info.total) {
-        const open = info.total - info.learned;
         cls += " ag-has-vocab";
-        if (open === 0) { cls += " ag-fully-learned"; badge = '<span class="ag-cal-count">\u2713</span>'; }
-        else badge = '<span class="ag-cal-count">'+open+"</span>";
+        if (info.open > 0) { badge = '<span class="ag-cal-count">'+info.open+"</span>"; }
+        else if (info.queue > 0) { cls += " ag-queued"; badge = '<span class="ag-cal-count queued" title="in Warteschlange">'+info.queue+"</span>"; }
+        else { cls += " ag-fully-learned"; badge = '<span class="ag-cal-count">\u2713</span>'; }
       }
       if (iso === today) cls += " today";
       if (iso === AG.calSelected) cls += " selected";
@@ -14131,14 +14175,16 @@ function bodyAxisTicks(start, end, period) {
     const seen = {}; let dayWords = [];
     vocDaysSorted().forEach(function (d) { d.words.forEach(function (w){ if(seen[w.word])return; seen[w.word]=1; if(d.date===AG.calSelected) dayWords.push(w); }); });
     if (!dayWords.length) return '<div class="ag-cal-empty">Keine Vokabeln an diesem Tag.</div>';
-    const offen = dayWords.filter(function (w){ return !(prog[w.word] && prog[w.word].learned); });
-    const gelernt = dayWords.filter(function (w){ return prog[w.word] && prog[w.word].learned; });
+    const rel = vocReleasedSet();
+    const offen = dayWords.filter(function (w){ return boxOf(prog[w.word])===0 && rel.has(w.word); });
+    const queue = dayWords.filter(function (w){ return boxOf(prog[w.word])===0 && !rel.has(w.word); });
+    const gelernt = dayWords.filter(function (w){ return boxOf(prog[w.word])>=1; });
     let html = '<div class="ag-day-head"><div class="ag-day-date">'+vocDayLabel(AG.calSelected)+'</div>' +
-      '<div class="ag-day-meta">'+offen.length+" offen \u00B7 "+gelernt.length+" gelernt</div></div>";
+      '<div class="ag-day-meta">'+offen.length+" offen \u00B7 "+gelernt.length+" gelernt"+(queue.length?(" \u00B7 "+queue.length+" Warteschlange"):"")+"</div></div>";
     // Offen
     html += '<div class="ag-sec"><div class="ag-sec-head"><span>Offen</span><span class="ag-sec-count">'+offen.length+"</span></div>";
     if (offen.length) html += '<div class="ag-card-grid">'+offen.map(function(w){return vocFlipCardHTML(w, prog[w.word]);}).join("")+"</div>";
-    else html += '<div class="ag-cal-alllearned">\u2713 Alle Vokabeln dieses Tages gelernt.</div>';
+    else html += '<div class="ag-cal-alllearned">\u2713 Keine offenen Vokabeln an diesem Tag.</div>';
     html += "</div>";
     // Gelernt (einklappbar)
     if (gelernt.length) {
@@ -14146,6 +14192,11 @@ function bodyAxisTicks(start, end, period) {
       html += '<div class="ag-sec"><div class="ag-sec-head done ag-sec-toggle'+(collapsed?" collapsed":"")+'" id="agGelerntToggle"><span class="ag-caret">\u25BE</span> <span>Gelernt</span><span class="ag-sec-count">'+gelernt.length+"</span></div>";
       if (!collapsed) html += '<div class="ag-card-grid">'+gelernt.map(function(w){return vocFlipCardHTML(w, prog[w.word]);}).join("")+"</div>";
       html += "</div>";
+    }
+    // Warteschlange (Hinweis – wird täglich freigeschaltet)
+    if (queue.length) {
+      html += '<div class="ag-sec"><div class="ag-sec-head"><span>Warteschlange</span><span class="ag-sec-count">'+queue.length+"</span></div>" +
+        '<div class="ag-queue-note">\uD83D\uDD52 '+queue.length+' Vokabel'+(queue.length===1?"":"n")+' warten \u2013 werden t\u00E4glich (bis zu 20) als \u201ENeu\u201C freigeschaltet, sobald unter 100 offene.</div></div>';
     }
     return html;
   }
@@ -14181,9 +14232,14 @@ function bodyAxisTicks(start, end, period) {
      ARCHIV — alle Vokabeln, sortier- & filterbar
      =================================================================== */
   function stripArt(s) { return String(s||"").replace(/^(der |die |das )/i, "").toLowerCase(); }
-  function rowHTML(w, prog) {
-    const learned = prog[w.key] && prog[w.key].learned;
-    let h = '<div class="ag-row'+(learned?" learned":"")+'" data-key="'+esc(w.word)+'">' +
+  function vocStatusKey(key, prog, rel) {
+    if (boxOf((prog||vocLoadProg())[key]) >= 1) return "gelernt";
+    return (rel||vocReleasedSet()).has(key) ? "offen" : "warteschlange";
+  }
+  function rowHTML(w, prog, rel) {
+    const st = vocStatusKey(w.key, prog, rel);
+    const cls = st === "gelernt" ? " learned" : (st === "warteschlange" ? " queued" : "");
+    let h = '<div class="ag-row'+cls+'" data-key="'+esc(w.word)+'">' +
       '<div class="ag-row-check" data-check="1">\u2713</div>' +
       '<div class="ag-row-word">'+esc(w.word)+'</div>' +
       '<div class="ag-row-pos">'+esc(posClass(w.pos))+'</div>' +
@@ -14192,30 +14248,30 @@ function bodyAxisTicks(start, end, period) {
     return h;
   }
   function archBodyHTML() {
-    const prog = vocLoadProg();
+    const prog = vocLoadProg(); const rel = vocReleasedSet();
     let words = vocAllWords().filter(function (w) {
-      const learned = prog[w.key] && prog[w.key].learned;
-      if (AG.archStatus === "offen" && learned) return false;
-      if (AG.archStatus === "gelernt" && !learned) return false;
+      const st = vocStatusKey(w.key, prog, rel);
+      if (AG.archStatus !== "alle" && AG.archStatus !== st) return false;
       return AG.archPos === "alle" || posClass(w.pos) === AG.archPos;
     });
     if (!words.length) return emptyState("Keine Vokabeln in dieser Auswahl.");
     const s = AG.archSort;
     if (s === "alpha") words.sort(function (a,b){ return stripArt(a.word).localeCompare(stripArt(b.word),"de"); });
     else if (s === "pos") words.sort(function (a,b){ return posClass(a.pos).localeCompare(posClass(b.pos),"de") || stripArt(a.word).localeCompare(stripArt(b.word),"de"); });
-    else if (s === "status") words.sort(function (a,b){ const ra=(prog[a.key]&&prog[a.key].learned)?1:0, rb=(prog[b.key]&&prog[b.key].learned)?1:0; return (ra-rb) || stripArt(a.word).localeCompare(stripArt(b.word),"de"); });
+    else if (s === "status") { const ord={offen:0,warteschlange:1,gelernt:2}; words.sort(function (a,b){ return (ord[vocStatusKey(a.key,prog,rel)]-ord[vocStatusKey(b.key,prog,rel)]) || stripArt(a.word).localeCompare(stripArt(b.word),"de"); }); }
     else words.sort(function (a,b){ return b.date.localeCompare(a.date); });
     let html = '<div class="ag-list-meta">'+words.length+" Vokabeln \u00B7 Zeile tippen f\u00FCr Beispiel \u00B7 H\u00E4kchen = gelernt</div>";
     if (s === "pos" || s === "status") {
+      const stLbl = { offen:"Offen", warteschlange:"Warteschlange", gelernt:"Gelernt" };
       let cur = null, openList = false;
       words.forEach(function (w) {
-        const g = (s === "pos") ? posClass(w.pos) : ((prog[w.key]&&prog[w.key].learned) ? "Gelernt" : "Offen");
+        const g = (s === "pos") ? posClass(w.pos) : stLbl[vocStatusKey(w.key, prog, rel)];
         if (g !== cur) { if (openList) html += "</div>"; html += '<div class="ag-group-head">'+esc(g)+'</div><div class="ag-list">'; cur = g; openList = true; }
-        html += rowHTML(w, prog);
+        html += rowHTML(w, prog, rel);
       });
       if (openList) html += "</div>";
     } else {
-      html += '<div class="ag-list">' + words.map(function(w){ return rowHTML(w, prog); }).join("") + "</div>";
+      html += '<div class="ag-list">' + words.map(function(w){ return rowHTML(w, prog, rel); }).join("") + "</div>";
     }
     return html;
   }
@@ -14235,7 +14291,7 @@ function bodyAxisTicks(start, end, period) {
   function renderVocArchiv() {
     const root = document.getElementById("agVocArchiv"); if (!root) return;
     const sorts = [["datum","Datum"],["alpha","Alphabetisch"],["pos","Wortart"],["status","Status"]];
-    const statuses = [["alle","Alle"],["offen","Offen"],["gelernt","Gelernt"]];
+    const statuses = [["alle","Alle"],["offen","Offen"],["warteschlange","Warteschlange"],["gelernt","Gelernt"]];
     const posList = posOptions();
     let bar = '<div class="ag-arch-bar">' +
       '<div class="ag-arch-line"><span class="ag-arch-label">Sortieren</span>' +
@@ -14270,17 +14326,21 @@ function bodyAxisTicks(start, end, period) {
      ABFRAGE — Box-Mix + gezielte Boxen
      =================================================================== */
   function boxCounts() {
-    const words = vocAllWords(); const prog = vocLoadProg();
-    const c = { mix: words.length, neu:0, 1:0,2:0,3:0,4:0,5:0 };
-    words.forEach(function (w) { const b = boxOf(prog[w.key]); if (b===0) c.neu++; else c[b]++; });
+    const words = vocAllWords(); const prog = vocLoadProg(); const rel = vocReleasedSet();
+    const c = { mix:0, neu:0, 1:0,2:0,3:0,4:0,5:0 };
+    words.forEach(function (w) {
+      const b = boxOf(prog[w.key]);
+      if (b === 0) { if (rel.has(w.key)) { c.neu++; c.mix++; } }
+      else { c[b]++; c.mix++; }
+    });
     return c;
   }
   function srcPool() {
-    const words = vocAllWords(); const prog = vocLoadProg(); const s = AG.quizCfg.src;
-    if (s === "mix") return words.slice();
-    if (s === "neu") return words.filter(function (w){ return boxOf(prog[w.key])===0; });
+    const words = vocAllWords(); const prog = vocLoadProg(); const rel = vocReleasedSet(); const s = AG.quizCfg.src;
+    if (s === "mix") return words.filter(function (w){ return boxOf(prog[w.key]) >= 1 || rel.has(w.key); });
+    if (s === "neu") return words.filter(function (w){ return boxOf(prog[w.key]) === 0 && rel.has(w.key); });
     const b = parseInt(s,10);
-    return words.filter(function (w){ return boxOf(prog[w.key])===b; });
+    return words.filter(function (w){ return boxOf(prog[w.key]) === b; });
   }
   function buildSrcOrder(pool) {
     const prog = vocLoadProg();
@@ -14309,14 +14369,17 @@ function bodyAxisTicks(start, end, period) {
     }
     const srcOpts = [
       { v:"mix", l:"Intelligenter Mix", c:counts.mix },
-      { v:"neu", l:"Neu", c:counts.neu },
+      { v:"neu", l:"Neu (offen)", c:counts.neu },
       { v:"1", l:"Box 1", c:counts[1] }, { v:"2", l:"Box 2", c:counts[2] },
       { v:"3", l:"Box 3", c:counts[3] }, { v:"4", l:"Box 4", c:counts[4] }, { v:"5", l:"Box 5", c:counts[5] }
     ];
-    const srcGrid = '<div class="ag-srcgrid" data-qgroup="src">' + srcOpts.map(function (o) {
-      const active = cfg.src === o.v ? " active" : "";
-      return '<button class="ag-src'+active+'" data-qval="'+o.v+'"><div class="sl">'+o.l+'</div><div class="sc">'+o.c+" Vokabeln</div></button>";
-    }).join("") + "</div>";
+    const srcSelect = '<select class="ag-quiz-select" id="agSrcSelect">' + srcOpts.map(function (o) {
+      return '<option value="'+o.v+'"'+(cfg.src===o.v?" selected":"")+">"+o.l+" \u00B7 "+o.c+" Vokabeln</option>";
+    }).join("") + "</select>";
+    const lenOpts = [{v:"10",l:"10 Vokabeln"},{v:"20",l:"20 Vokabeln"},{v:"30",l:"30 Vokabeln"},{v:"40",l:"40 Vokabeln"},{v:"0",l:"Alle"}];
+    const lenSelect = '<select class="ag-quiz-select" id="agLenSelect">' + lenOpts.map(function (o) {
+      return '<option value="'+o.v+'"'+(String(cfg.len)===String(o.v)?" selected":"")+">"+o.l+"</option>";
+    }).join("") + "</select>";
 
     const avail = srcPool().length;
     root.innerHTML = '<div class="ag-quiz-setup">' +
@@ -14324,21 +14387,20 @@ function bodyAxisTicks(start, end, period) {
       chips("dir", [{v:"de-en",l:"Deutsch \u2192 Englisch"},{v:"en-de",l:"Englisch \u2192 Deutsch"}]) +
       '<div class="ag-meta" style="margin:14px 0 10px;">Modus</div>' +
       chips("mode", [{v:"input",l:"Eingabe (tippen)"},{v:"choice",l:"Auswahl (4 Optionen)"}]) +
-      '<div class="ag-meta" style="margin:14px 0 10px;">Quelle / Leitner-Box</div>' + srcGrid +
-      '<div class="ag-meta" style="margin:14px 0 10px;">Umfang</div>' +
-      chips("len", [{v:"10",l:"10"},{v:"20",l:"20"},{v:"30",l:"30"},{v:"40",l:"40"},{v:"0",l:"Alle"}]) +
+      '<div class="ag-meta" style="margin:14px 0 10px;">Quelle / Leitner-Box</div>' + srcSelect +
+      '<div class="ag-meta" style="margin:14px 0 10px;">Umfang</div>' + lenSelect +
       '<div style="margin-top:22px;"><button class="btn btn-primary" id="agQuizStart">Abfrage starten</button> <span class="ag-meta" id="agQuizAvail">'+avail+' verf\u00FCgbar</span></div>' +
       "</div>";
 
-    root.querySelectorAll('[data-qgroup="dir"] .ag-chip, [data-qgroup="mode"] .ag-chip, [data-qgroup="len"] .ag-chip').forEach(function (ch) {
+    root.querySelectorAll('[data-qgroup="dir"] .ag-chip, [data-qgroup="mode"] .ag-chip').forEach(function (ch) {
       ch.onclick = function () {
-        const name = ch.parentNode.dataset.qgroup; let v = ch.dataset.qval;
-        AG.quizCfg[name] = (name === "len") ? parseInt(v,10) : v; renderVocAbfrage();
+        const name = ch.parentNode.dataset.qgroup; AG.quizCfg[name] = ch.dataset.qval; renderVocAbfrage();
       };
     });
-    root.querySelectorAll('.ag-srcgrid .ag-src').forEach(function (b) {
-      b.onclick = function () { AG.quizCfg.src = b.dataset.qval; renderVocAbfrage(); };
-    });
+    const ss = document.getElementById("agSrcSelect");
+    if (ss) ss.onchange = function () { AG.quizCfg.src = ss.value; renderVocAbfrage(); };
+    const ls = document.getElementById("agLenSelect");
+    if (ls) ls.onchange = function () { AG.quizCfg.len = parseInt(ls.value,10); renderVocAbfrage(); };
     const start = document.getElementById("agQuizStart");
     if (start) start.onclick = startQuiz;
   }
@@ -14421,8 +14483,13 @@ function bodyAxisTicks(start, end, period) {
   function applyAnswer(w, ok) {
     const q = AG.quiz; const prog = vocLoadProg();
     const e = prog[w.key] || { box:1, correct:0, wrong:0, seen:0, learned:false };
+    const wasUntouched = boxOf(e) === 0;
     e.seen = (e.seen||0)+1; e.last = todayISO();
-    if (ok) {
+    if (wasUntouched) {
+      e.box = 1; // erstes Lernen -> Box 1, egal ob richtig oder falsch
+      if (ok) { e.correct = (e.correct||0)+1; q.correct++; }
+      else    { e.wrong   = (e.wrong||0)+1;   q.wrong++; }
+    } else if (ok) {
       e.correct = (e.correct||0)+1; e.box = Math.min(5, (e.box||1)+1);
       if (e.box >= 5 && !e.learned) { e.learned = true; e.learnedAt = todayISO(); }
       q.correct++;
@@ -14546,10 +14613,18 @@ function bodyAxisTicks(start, end, period) {
     root.querySelectorAll("#agStatPeriod .chip").forEach(function (b){ b.onclick = function(){ AG.statPeriod = b.dataset.statp; renderVocStatistik(); }; });
     root.querySelectorAll("[data-box]").forEach(function (b){ b.onclick = function(){ AG.boxOpen = (AG.boxOpen===b.dataset.box)?null:b.dataset.box; renderVocStatistik(); }; });
     document.getElementById("agVocReset").onclick = function () {
-      if (confirm("Gesamten Lernfortschritt (gelernt-Markierungen + Box-Status) wirklich zur\u00FCcksetzen? Die Vokabeln selbst bleiben erhalten.")) {
-        try { localStorage.removeItem(VOC_PROG_KEY); } catch(e){}
+      if (confirm("Lernfortschritt der Leitner-Boxen zur\u00FCcksetzen? Alle Vokabeln aus Box 1\u20135 wandern gesammelt zur\u00FCck in Box 1. \u201ENeu\u201C-Vokabeln bleiben unver\u00E4ndert.")) {
+        const prog = vocLoadProg();
+        Object.keys(prog).forEach(function (k) {
+          const e = prog[k];
+          if (boxOf(e) >= 1) {            // nur bereits gelernte/abgefragte zur\u00FCck nach Box 1
+            e.box = 1; e.learned = false; delete e.learnedAt;
+            if (!e.seen) e.seen = 1;      // bleibt "ber\u00FChrt" (Box 1), f\u00E4llt nicht zur\u00FCck in "Neu"
+          }
+        });
+        vocSaveProg(prog);
         AG.boxOpen = null; renderVocStats(); renderVocStatistik();
-        if (typeof toast === "function") toast("Lernfortschritt zur\u00FCckgesetzt", "success");
+        if (typeof toast === "function") toast("Boxen 1\u20135 auf Box 1 zur\u00FCckgesetzt", "success");
       }
     };
   }
