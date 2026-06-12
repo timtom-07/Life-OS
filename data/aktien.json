@@ -1,0 +1,73 @@
+{
+  "updated": "2026-06-12",
+  "dateLabel": "Freitag, 12. Juni 2026",
+  "generated": "2026-06-12T15:54:05+02:00",
+  "pdf": "./data/stocks-latest.pdf",
+  "summary": "Die Wall Street ist heute uneinheitlich: Hoffnungen auf ein baldiges US-Iran-Abkommen (Wiedereröffnung der Straße von Hormus) drücken die Ölpreise, während an der Nasdaq mit dem Debüt von SpaceX der mit rund 75 Mrd. USD größte Börsengang der Geschichte im Mittelpunkt steht.",
+  "items": [
+    {
+      "ticker": "SPCX",
+      "name": "SpaceX",
+      "changePct": 0.0,
+      "flag": "watch",
+      "flagLabel": "IPO-Debüt",
+      "note": "Erster Handelstag nach dem mit rund 75 Mrd. USD größten Börsengang der Geschichte (Bewertung ca. 1,77 Billionen USD); die starke Überzeichnung der Zeichnung spricht hypothetisch für mögliches weiteres Kurspotenzial in den ersten Handelstagen."
+    },
+    {
+      "ticker": "NVDA",
+      "name": "Nvidia",
+      "changePct": 2.2,
+      "flag": "buy",
+      "flagLabel": "Buy",
+      "note": "Der anhaltende KI-Chip-Boom treibt Nvidia weiter an; zusätzlich sorgen Berichte über Lieferungen neuer Hochleistungschips an Raumfahrtkunden wie SpaceX für positive Stimmung."
+    },
+    {
+      "ticker": "ADBE",
+      "name": "Adobe",
+      "changePct": -5.5,
+      "flag": "alert",
+      "flagLabel": "Alert",
+      "note": "Trotz eines Gewinnsprungs im Q2 belasten der überraschende Abgang von CFO Dan Durn und ein um rund 500 Mio. USD gesenkter ARR-Ausblick den Kurs; mehrere Analysten haben ihre Kursziele bereits gesenkt."
+    },
+    {
+      "ticker": "RKLB",
+      "name": "Rocket Lab",
+      "changePct": 9.3,
+      "flag": "watch",
+      "flagLabel": "Watch",
+      "note": "Die angekündigte Aufnahme in den Nasdaq-100 zum 22. Juni könnte zusätzliche Käufe durch Indexfonds auslösen und den jüngsten Höhenflug der Aktie weiter befeuern."
+    },
+    {
+      "ticker": "META",
+      "name": "Meta Platforms",
+      "changePct": -0.7,
+      "flag": "hold",
+      "flagLabel": "Hold",
+      "note": "Chinas Investitionsbehörde NDRC hat die geplante Übernahme des KI-Start-ups Manus blockiert, was geopolitische Risiken für Metas KI-Strategie zeigt; starke Q1-Zahlen (Umsatz +33% YoY) stützen den Kurs aber weiterhin."
+    },
+    {
+      "ticker": "HIMS",
+      "name": "Hims & Hers Health",
+      "changePct": 2.0,
+      "flag": "watch",
+      "flagLabel": "Reddit-Hype",
+      "note": "Die Anfang Juni abgeschlossene Übernahme der australischen Eucalyptus-Gruppe bringt über 850.000 neue Kunden und wird in der Reddit-Community als Wachstumstreiber gefeiert, nachdem die Aktie zuvor wegen schwacher Q1-Zahlen stark gefallen war."
+    },
+    {
+      "ticker": "PLTK",
+      "name": "Playtika",
+      "changePct": 2.8,
+      "flag": "buy",
+      "flagLabel": "Buy",
+      "note": "BofA hat Playtika auf 'Buy' mit Kursziel 6,50 USD hochgestuft; die laufende strategische Überprüfung (möglicher Verkauf) und das starke Wachstum der Direct-to-Consumer-Plattform Disney Solitaire (+62,8% YoY) treiben die Aktie."
+    },
+    {
+      "ticker": "NOK",
+      "name": "Nokia",
+      "changePct": 5.2,
+      "flag": "buy",
+      "flagLabel": "Buy",
+      "note": "Bank of America und JPMorgan haben ihre Kursziele für Nokia wegen der starken Position im KI-Netzwerkgeschäft deutlich angehoben, begleitet von zusätzlicher Aufmerksamkeit aus der Reddit/WSB-Community."
+    }
+  ]
+}
