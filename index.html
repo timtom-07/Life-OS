@@ -4945,6 +4945,7 @@ button { cursor: pointer; background: none; border: none; }
 .ag-flag.watch { color: var(--flag-blue);   background: var(--flag-blue-bg); }
 .ag-flag.hold  { color: var(--flag-yellow); background: var(--flag-yellow-bg); }
 .ag-flag.alert { color: var(--flag-red);    background: var(--flag-red-bg); }
+.ag-flag.sell  { color: #fff;               background: var(--flag-red); }
 
 /* ===================================================================
    VOKABELTRAINER
@@ -13963,7 +13964,7 @@ function bodyAxisTicks(start, end, period) {
     let html = '<div class="ag-news-date">' + esc(a.dateLabel || a.updated || "") + (a.generated ? " \u00B7 Stand " + esc(fmtTime(a.generated)) : "") + "</div>";
     if (a.pdf) html += pdfBlock(a.pdf, "agStocksPdf");
     const items = Array.isArray(a.items) ? a.items : [];
-    const FLAGS = ["buy","watch","hold","alert"];
+    const FLAGS = ["buy","watch","hold","alert","sell"];
     items.forEach(function (it) {
       const flag = FLAGS.indexOf(it.flag) >= 0 ? it.flag : "watch";
       let chg = "";
