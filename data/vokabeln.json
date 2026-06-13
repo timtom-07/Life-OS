@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-12",
+  "updated": "2026-06-13",
   "days": [
     { "date": "2026-06-12", "words": [
       { "word": "die Belastbarkeit", "pos": "Substantiv, die", "def": "resilience; robustness", "ex": "The team showed remarkable resilience under pressure." },
@@ -22,6 +22,28 @@
       { "word": "die Voreingenommenheit", "pos": "Substantiv, die", "def": "bias; prejudice", "ex": "The committee was criticized for its apparent bias toward larger firms." },
       { "word": "ausgereift", "pos": "Adjektiv", "def": "sophisticated; refined; mature", "ex": "The software has become remarkably sophisticated over the years." },
       { "word": "die Eigeninitiative", "pos": "Substantiv, die", "def": "initiative", "ex": "He showed great initiative by proposing the new workflow himself." }
+    ] },
+    { "date": "2026-06-13", "words": [
+      { "word": "die Auflage", "pos": "Substantiv, die", "def": "edition; print run; condition", "ex": "The publisher decided to print a second edition due to high demand." },
+      { "word": "der Anreiz", "pos": "Substantiv, der", "def": "incentive", "ex": "The company introduced a bonus scheme as an incentive for top performers." },
+      { "word": "die Verflechtung", "pos": "Substantiv, die", "def": "interconnection; entanglement", "ex": "The financial crisis exposed the dangerous interconnection between major banks." },
+      { "word": "die Tragfähigkeit", "pos": "Substantiv, die", "def": "viability; sustainability", "ex": "Investors questioned the long-term viability of the business model." },
+      { "word": "nachvollziehbar", "pos": "Adjektiv", "def": "comprehensible; traceable; understandable", "ex": "Every step of the decision-making process must remain traceable." },
+      { "word": "die Abwicklung", "pos": "Substantiv, die", "def": "processing; settlement; execution", "ex": "The settlement of the transaction took several business days." },
+      { "word": "zielführend", "pos": "Adjektiv", "def": "effective; expedient", "ex": "None of the proposed measures proved particularly effective." },
+      { "word": "die Eigenverantwortung", "pos": "Substantiv, die", "def": "personal responsibility; accountability", "ex": "The new policy encourages employees to take greater accountability for their work." },
+      { "word": "der Anhaltspunkt", "pos": "Substantiv, der", "def": "indication; clue; lead", "ex": "Investigators finally found a crucial lead in the case." },
+      { "word": "unumgänglich", "pos": "Adjektiv", "def": "inevitable; unavoidable", "ex": "Given the revenue shortfall, budget cuts were unavoidable." },
+      { "word": "aufschlussreich", "pos": "Adjektiv", "def": "informative; insightful; revealing", "ex": "The customer survey proved highly insightful for the marketing team." },
+      { "word": "die Rentabilität", "pos": "Substantiv, die", "def": "profitability", "ex": "Management focused on improving profitability across all divisions." },
+      { "word": "die Auseinandersetzung", "pos": "Substantiv, die", "def": "dispute; confrontation", "ex": "The lengthy dispute between the two companies ended in arbitration." },
+      { "word": "vorenthalten", "pos": "Verb", "def": "to withhold", "ex": "The supplier was accused of withholding crucial information about the defect." },
+      { "word": "die Erschließung", "pos": "Substantiv, die", "def": "development; opening up", "ex": "The firm's strategy centers on the development of new markets in Asia." },
+      { "word": "die Voraussetzung", "pos": "Substantiv, die", "def": "prerequisite; precondition", "ex": "A solid grasp of finance is a prerequisite for this role." },
+      { "word": "gewissenhaft", "pos": "Adjektiv", "def": "conscientious; meticulous", "ex": "She approached every task in a conscientious and meticulous manner." },
+      { "word": "die Abfindung", "pos": "Substantiv, die", "def": "severance pay; settlement", "ex": "He received a generous severance package after the restructuring." },
+      { "word": "ausufern", "pos": "Verb", "def": "to spiral out of control; to get out of hand", "ex": "Costs began to spiral out of control during the renovation project." },
+      { "word": "der Vorbehalt", "pos": "Substantiv, der", "def": "reservation; caveat", "ex": "The board approved the merger with one significant caveat." }
     ] }
   ]
 }
