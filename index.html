@@ -16109,9 +16109,9 @@ function bodyAxisTicks(start, end, period) {
   function agAfterToday(h, m) { const now = new Date(); return now.getHours() > h || (now.getHours() === h && now.getMinutes() >= m); }
   function agSourceDue(src) {
     const wd = new Date().getDay();
-    if (src === 'news')   return agAfterToday(7, 0);
-    if (src === 'voc')    return agAfterToday(2, 40);
-    if (src === 'stocks') return (wd >= 1 && wd <= 5) && agAfterToday(12, 0);
+    if (src === 'news')   return agAfterToday(7, 10);
+    if (src === 'voc')    return agAfterToday(2, 50);
+    if (src === 'stocks') return (wd >= 1 && wd <= 5) && agAfterToday(12, 10);
     return true;
   }
   function agNewsDate() { const n = AG.news || {}; return agDateOnly(n.date || n.generated || n.dateLabel); }
@@ -16121,10 +16121,15 @@ function bodyAxisTicks(start, end, period) {
     if (!AG.aktien) AG.aktien = await agFetchJSON("./data/aktien.json", FALLBACK_AKTIEN);
     if (!AG.voc)    AG.voc    = await agFetchJSON("./data/vokabeln.json", FALLBACK_VOC);
     const today = todayISO();
+    const newsDue = agSourceDue('news'), stocksDue = agSourceDue('stocks'), vocDue = agSourceDue('voc');
+    const vocHas = function () { return !!(AG.voc && Array.isArray(AG.voc.days) && AG.voc.days.some(function (d) { return agDateOnly(d.date) === today; })); };
+    // Verspätet nachgelieferte Daten erkennen: ist eine Quelle fällig, aber noch nicht aktuell, erneut laden (agFetchJSON lädt cache-frei).
+    if (newsDue   && agNewsDate()   < today) AG.news   = await agFetchJSON("./data/news.json", FALLBACK_NEWS);
+    if (stocksDue && agStocksDate() < today) AG.aktien = await agFetchJSON("./data/aktien.json", FALLBACK_AKTIEN);
+    if (vocDue    && !vocHas())              AG.voc    = await agFetchJSON("./data/vokabeln.json", FALLBACK_VOC);
     const prog = vocLoadProg();
     const nd = agNewsDate(), sd = agStocksDate();
-    const vocHasToday = !!(AG.voc && Array.isArray(AG.voc.days) && AG.voc.days.some(function (d) { return agDateOnly(d.date) === today; }));
-    const newsDue = agSourceDue('news'), stocksDue = agSourceDue('stocks'), vocDue = agSourceDue('voc');
+    const vocHasToday = vocHas();
     return {
       today: today,
       newsDate: nd,   newsStale: !!(newsDue && nd && nd < today),    newsDue: newsDue,
