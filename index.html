@@ -14642,7 +14642,13 @@ async function setWeeklyTarget() {
 function currentStreak(buckets, t) {
   if (t <= 0) return 0;
   let s = 0;
-  for (let i = buckets.length - 1; i >= 0; i--) { if (buckets[i].count >= t) s++; else break; }
+  let i = buckets.length - 1;
+  // Die aktuelle (letzte) Woche läuft noch: Hat sie das Ziel noch nicht erreicht,
+  // zählt sie als "offen" und darf die Serie NICHT abreißen lassen – wir starten
+  // dann bei der letzten abgeschlossenen Woche. Ist das Ziel diese Woche schon
+  // erreicht, wird sie ganz normal mitgezählt.
+  if (i >= 0 && buckets[i].count < t) i--;
+  for (; i >= 0; i--) { if (buckets[i].count >= t) s++; else break; }
   return s;
 }
 function longestActiveWeeks(buckets) {
