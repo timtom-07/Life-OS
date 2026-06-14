@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-13",
+  "updated": "2026-06-14",
   "days": [
     { "date": "2026-06-12", "words": [
       { "word": "die Belastbarkeit", "pos": "Substantiv, die", "def": "resilience; robustness", "ex": "The team showed remarkable resilience under pressure." },
@@ -44,6 +44,28 @@
       { "word": "die Abfindung", "pos": "Substantiv, die", "def": "severance pay; settlement", "ex": "He received a generous severance package after the restructuring." },
       { "word": "ausufern", "pos": "Verb", "def": "to spiral out of control; to get out of hand", "ex": "Costs began to spiral out of control during the renovation project." },
       { "word": "der Vorbehalt", "pos": "Substantiv, der", "def": "reservation; caveat", "ex": "The board approved the merger with one significant caveat." }
+    ] },
+    { "date": "2026-06-14", "words": [
+      { "word": "die Hürde", "pos": "Substantiv, die", "def": "hurdle; obstacle", "ex": "Regulatory hurdles delayed the product launch by several months." },
+      { "word": "die Belastung", "pos": "Substantiv, die", "def": "burden; strain", "ex": "The new compliance rules placed a considerable burden on small businesses." },
+      { "word": "einleuchten", "pos": "Verb", "def": "to make sense; to be evident", "ex": "Her reasoning made perfect sense to everyone on the board." },
+      { "word": "die Fertigstellung", "pos": "Substantiv, die", "def": "completion", "ex": "Completion of the new headquarters was delayed by several months." },
+      { "word": "die Rücklage", "pos": "Substantiv, die", "def": "reserve; provision", "ex": "The company set aside cash reserves for unforeseen expenses." },
+      { "word": "überschaubar", "pos": "Adjektiv", "def": "manageable; limited", "ex": "The financial risks involved were manageable given proper planning." },
+      { "word": "die Voraussicht", "pos": "Substantiv, die", "def": "foresight", "ex": "The CEO's foresight helped the company navigate the downturn." },
+      { "word": "der Anlass", "pos": "Substantiv, der", "def": "occasion; reason; cause", "ex": "There was no reason for concern, according to the spokesperson." },
+      { "word": "die Tücke", "pos": "Substantiv, die", "def": "pitfall; snag", "ex": "Hidden pitfalls in the contract caused problems further down the line." },
+      { "word": "der Vorsprung", "pos": "Substantiv, der", "def": "lead; head start; competitive edge", "ex": "The company maintained its competitive edge through continuous innovation." },
+      { "word": "die Schieflage", "pos": "Substantiv, die", "def": "imbalance; financial trouble", "ex": "The bank found itself in serious financial trouble after the crisis." },
+      { "word": "unabdingbar", "pos": "Adjektiv", "def": "indispensable; essential", "ex": "Clear communication is indispensable for effective teamwork." },
+      { "word": "die Abhilfe", "pos": "Substantiv, die", "def": "remedy; fix", "ex": "Management promised a swift remedy for the production delays." },
+      { "word": "sich abzeichnen", "pos": "Verb", "def": "to emerge; to become apparent", "ex": "A clear trend began to emerge in the quarterly figures." },
+      { "word": "die Aufwertung", "pos": "Substantiv, die", "def": "appreciation; upgrade", "ex": "The currency's appreciation put pressure on export-driven businesses." },
+      { "word": "die Abkehr", "pos": "Substantiv, die", "def": "departure; shift away", "ex": "The new strategy marked a clear departure from previous practices." },
+      { "word": "die Abwägung", "pos": "Substantiv, die", "def": "weighing up; consideration", "ex": "A careful weighing of risks and benefits preceded the final decision." },
+      { "word": "einbüßen", "pos": "Verb", "def": "to lose; to forfeit", "ex": "The firm risked losing its competitive advantage if it failed to innovate." },
+      { "word": "die Spanne", "pos": "Substantiv, die", "def": "margin; range; span", "ex": "Profit margins narrowed considerably due to rising costs." },
+      { "word": "unzulänglich", "pos": "Adjektiv", "def": "inadequate; insufficient", "ex": "The existing infrastructure proved inadequate for the company's growth." }
     ] }
   ]
 }
