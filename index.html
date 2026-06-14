@@ -8663,16 +8663,16 @@ async function renderNotifications(){
     let s = null; try { s = await window.agStatus(); } catch(e){ s = null; }
     if (s){
       if (notifAllowed('news')) {
-        if (!s.newsOpened)   items.push(['\uD83D\uDCF0','Daily News heute noch nicht gelesen', "navigate('briefing')", false]);
+        if (s.newsDue && !s.newsStale && !s.newsOpened) items.push(['\uD83D\uDCF0','Daily News heute noch nicht gelesen', "navigate('briefing')", false]);
         if (s.newsStale)     items.push(['\u26A0\uFE0F','Daily News: noch die Ausgabe vom '+s.newsDate, "navigate('briefing')", true]);
       }
       if (notifAllowed('stocks')) {
-        if (!s.stocksOpened) items.push(['\uD83D\uDCC8','Daily Stocks heute noch nicht geöffnet', "navigate('briefing')", false]);
+        if (s.stocksDue && !s.stocksStale && !s.stocksOpened) items.push(['\uD83D\uDCC8','Daily Stocks heute noch nicht geöffnet', "navigate('briefing')", false]);
         if (s.stocksStale)   items.push(['\u26A0\uFE0F','Daily Stocks: noch die Auswertung vom '+s.stocksDate, "navigate('briefing')", true]);
       }
       if (notifAllowed('vokabeln')) {
-        if (!s.vocLearnedToday) items.push(['\uD83D\uDCD6','Heute noch keine Vokabeln gelernt', "navigate('vokabeln')", false]);
-        if (!s.vocHasToday)     items.push(['\u26A0\uFE0F','Heute keine neuen Vokabeln bereitgestellt', "navigate('vokabeln')", true]);
+        if (s.vocDue && s.vocHasToday && !s.vocLearnedToday) items.push(['\uD83D\uDCD6','Heute noch keine Vokabeln gelernt', "navigate('vokabeln')", false]);
+        if (s.vocDue && !s.vocHasToday)     items.push(['\u26A0\uFE0F','Heute keine neuen Vokabeln bereitgestellt', "navigate('vokabeln')", true]);
       }
     }
   }
@@ -15355,7 +15355,7 @@ function bodyAxisTicks(start, end, period) {
     if (!n) { root.innerHTML = emptyState("Keine News geladen."); return; }
     let html = "";
     var _nd = agNewsDate();
-    if (notifAllowed('news') && _nd && _nd < todayISO()) html += '<div class="ag-stale">Es werden noch die News vom ' + esc(_nd) + ' angezeigt \u2013 heute wurde keine neue Ausgabe bereitgestellt.</div>';
+    if (notifAllowed('news') && agSourceDue('news') && _nd && _nd < todayISO()) html += '<div class="ag-stale">Es werden noch die News vom ' + esc(_nd) + ' angezeigt \u2013 heute wurde keine neue Ausgabe bereitgestellt.</div>';
     html += '<div class="ag-news-date">' + esc(n.dateLabel || n.date || "") + (n.generated ? " \u00B7 erzeugt " + esc(fmtTime(n.generated)) : "") + "</div>";
     const changes = Array.isArray(n.changes_since_yesterday) ? n.changes_since_yesterday : [];
     if (changes.length) html += '<div class="ag-diff"><div class="ag-diff-title">Was ist neu seit gestern</div><ul>' + changes.map(function(c){return "<li>"+esc(c)+"</li>";}).join("") + "</ul></div>";
@@ -15375,7 +15375,7 @@ function bodyAxisTicks(start, end, period) {
     if (!a) { root.innerHTML = emptyState("Keine Daten geladen."); return; }
     let html = "";
     var _sd = agStocksDate();
-    if (notifAllowed('stocks') && _sd && _sd < agPrevTradingDayISO()) html += '<div class="ag-stale">Es werden noch die Daily Stocks vom ' + esc(_sd) + ' angezeigt \u2013 seitdem wurde keine neue Auswertung bereitgestellt.</div>';
+    if (notifAllowed('stocks') && agSourceDue('stocks') && _sd && _sd < todayISO()) html += '<div class="ag-stale">Es werden noch die Daily Stocks vom ' + esc(_sd) + ' angezeigt \u2013 seitdem wurde keine neue Auswertung bereitgestellt.</div>';
     html += '<div class="ag-news-date">' + esc(a.dateLabel || a.updated || "") + (a.generated ? " \u00B7 Stand " + esc(fmtTime(a.generated)) : "") + "</div>";
     if (a.pdf) html += pdfBlock(a.pdf, "agStocksPdf");
     const items = Array.isArray(a.items) ? a.items : [];
@@ -15493,7 +15493,7 @@ function bodyAxisTicks(start, end, period) {
     words.forEach(function (w) { const e=prog[w.key]; if(boxOf(e)>=1){ learned++; if(vocDue(e)) due++; } });
     const days = AG.voc ? AG.voc.days.length : 0;
     var _vToday = !!(AG.voc && Array.isArray(AG.voc.days) && AG.voc.days.some(function(d){ return agDateOnly(d.date)===todayISO(); }));
-    var _vBanner = (_vToday || !notifAllowed('vokabeln')) ? "" : '<div class="ag-stale">Heute wurden keine neuen Vokabeln bereitgestellt \u2013 deine offenen Vokabeln stehen weiterhin bereit.</div>';
+    var _vBanner = (_vToday || !notifAllowed('vokabeln') || !agSourceDue('voc')) ? "" : '<div class="ag-stale">Heute wurden keine neuen Vokabeln bereitgestellt \u2013 deine offenen Vokabeln stehen weiterhin bereit.</div>';
     el.innerHTML = _vBanner + '<div class="ag-voc-statrow">' +
       '<div class="ag-voc-stat"><div class="num">'+words.length+'</div><div class="lbl">Vokabeln gesamt</div></div>' +
       '<div class="ag-voc-stat"><div class="num"><em>'+learned+'</em></div><div class="lbl">Gelernt</div></div>' +
@@ -16104,6 +16104,16 @@ function bodyAxisTicks(start, end, period) {
   /* ---------- Status: Frische & Aktivität (für Dashboard-Hinweise) ---------- */
   function agDateOnly(s) { if (!s) return ""; const m = String(s).match(/(\d{4}-\d{2}-\d{2})/); return m ? m[1] : ""; }
   function agPrevTradingDayISO() { const d = new Date(); d.setHours(0,0,0,0); do { d.setDate(d.getDate()-1); } while (d.getDay()===0 || d.getDay()===6); return localISO(d); }
+  /* Ab wann sind heute neue Daten zu erwarten? News 07:00, Vokabeln 02:40, Stocks Mo–Fr 12:00.
+     Erst nach dieser Zeit (und wenn dann noch keine neuen Daten da sind) wird gewarnt. */
+  function agAfterToday(h, m) { const now = new Date(); return now.getHours() > h || (now.getHours() === h && now.getMinutes() >= m); }
+  function agSourceDue(src) {
+    const wd = new Date().getDay();
+    if (src === 'news')   return agAfterToday(7, 0);
+    if (src === 'voc')    return agAfterToday(2, 40);
+    if (src === 'stocks') return (wd >= 1 && wd <= 5) && agAfterToday(12, 0);
+    return true;
+  }
   function agNewsDate() { const n = AG.news || {}; return agDateOnly(n.date || n.generated || n.dateLabel); }
   function agStocksDate() { const a = AG.aktien || {}; return agDateOnly(a.updated || a.generated || a.dateLabel); }
   async function agStatus() {
@@ -16114,11 +16124,12 @@ function bodyAxisTicks(start, end, period) {
     const prog = vocLoadProg();
     const nd = agNewsDate(), sd = agStocksDate();
     const vocHasToday = !!(AG.voc && Array.isArray(AG.voc.days) && AG.voc.days.some(function (d) { return agDateOnly(d.date) === today; }));
+    const newsDue = agSourceDue('news'), stocksDue = agSourceDue('stocks'), vocDue = agSourceDue('voc');
     return {
       today: today,
-      newsDate: nd,   newsStale: !!(nd && nd < today),
-      stocksDate: sd, stocksStale: !!(sd && sd < agPrevTradingDayISO()),
-      vocHasToday: vocHasToday,
+      newsDate: nd,   newsStale: !!(newsDue && nd && nd < today),    newsDue: newsDue,
+      stocksDate: sd, stocksStale: !!(stocksDue && sd && sd < today), stocksDue: stocksDue,
+      vocHasToday: vocHasToday, vocDue: vocDue,
       newsOpened: localStorage.getItem("lifeos:newsOpened") === today,
       stocksOpened: localStorage.getItem("lifeos:stocksOpened") === today,
       vocLearnedToday: localStorage.getItem("lifeos:vocActive") === today || Object.keys(prog).some(function (k) { return prog[k] && prog[k].last === today; })
