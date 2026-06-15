@@ -5512,6 +5512,9 @@ input[type="search"], textarea, select{ border-radius: 10px; }
 .habit-streak-val.on{ color:var(--ink); }
 
 .life-hint{ font-size:12px; color:var(--ink-mute); line-height:1.5; margin-top:8px; }
+.habit-link-field{ margin-bottom:16px; }
+.habit-link-row{ display:flex; align-items:center; justify-content:space-between; gap:14px; cursor:pointer; margin:0; }
+.habit-link-row .hlr-label{ font-size:14px; font-weight:500; color:var(--ink); text-transform:none; letter-spacing:normal; }
 
 /* Name + Ziel bleiben beim horizontalen Scrollen stehen */
 .habit-matrix .hm-name{ z-index:2; }
@@ -5550,8 +5553,8 @@ input[type="search"], textarea, select{ border-radius: 10px; }
 .notif-pref .np-tx small{ font-size: 12px; color: var(--ink-mute); }
 .switch{ position: relative; flex: none; width: 44px; height: 25px; }
 .switch input{ position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; z-index: 2; }
-.switch .switch-track{ position: absolute; inset: 0; border-radius: 999px; background: var(--line); transition: background .2s var(--ease); }
-.switch .switch-track::after{ content: ""; position: absolute; top: 3px; left: 3px; width: 19px; height: 19px; border-radius: 50%; background: #fff; box-shadow: var(--shadow-sm); transition: transform .2s var(--ease); }
+.switch .switch-track{ position: absolute; inset: 0; border-radius: 999px; background: var(--ink-mute); transition: background .2s var(--ease); }
+.switch .switch-track::after{ content: ""; position: absolute; top: 3px; left: 3px; width: 19px; height: 19px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.3); transition: transform .2s var(--ease); }
 .switch input:checked + .switch-track{ background: var(--accent); }
 .switch input:checked + .switch-track::after{ transform: translateX(19px); }
 .ag-stale{ padding: 11px 15px; margin-bottom: 14px; border: 1px solid color-mix(in oklab, var(--accent) 38%, var(--line)); background: color-mix(in oklab, var(--accent) 7%, var(--bg-card)); border-radius: var(--radius-lg); font-size: 13px; line-height: 1.5; color: var(--ink); }
@@ -6776,7 +6779,7 @@ select {
       <div class="life-field">
         <label>Emoji</label>
         <div class="habit-emoji-field">
-          <input type="text" id="habitEmoji" maxlength="2" placeholder="📖">
+          <input type="text" id="habitEmoji" maxlength="2" placeholder="">
           <div class="habit-emoji-quick">
             <button type="button" onclick="setHabitEmoji('📖')">📖</button>
             <button type="button" onclick="setHabitEmoji('💧')">💧</button>
@@ -6834,6 +6837,13 @@ select {
       <div class="life-field">
         <label>Kategorie</label>
         <select id="habitCategory"></select>
+      </div>
+
+      <div class="habit-link-field">
+        <label class="habit-link-row">
+          <span class="hlr-label">Mit Fitness verknüpfen</span>
+          <span class="switch"><input type="checkbox" id="habitFitnessLink"><span class="switch-track"></span></span>
+        </label>
       </div>
 
       <div class="modal-actions">
@@ -8080,8 +8090,8 @@ async function toggleHabitToday(habitId,date){
   const h=(await habitsAll()).find(x=>x.id===habitId); if(!h) return;
   const log=await db.get('habitLogs',habitLogKey(habitId,date));
   const isDone = log && (h.htype==='quantity' ? logComplete(h,log) : log.done);
-  if(h.htype==='quantity') await setHabitLog(h,date,{ value: isDone?0:(+h.target||1), skipped:false });
-  else await setHabitLog(h,date,{ done:!isDone, skipped:false });
+  if(h.htype==='quantity') await setHabitLog(h,date,{ value: isDone?0:(+h.target||1), skipped:false, autoFitness:false });
+  else await setHabitLog(h,date,{ done:!isDone, skipped:false, autoFitness:false });
 }
 async function incHabitValue(habitId,date,delta){
   const h=(await habitsAll()).find(x=>x.id===habitId); if(!h) return;
@@ -8093,6 +8103,56 @@ async function toggleHabitSkip(habitId,date){
   const h=(await habitsAll()).find(x=>x.id===habitId); if(!h) return;
   const log=await db.get('habitLogs',habitLogKey(habitId,date));
   await setHabitLog(h,date,{ skipped:!(log&&log.skipped) });
+}
+
+/* ---- Sport-Habit ⇄ Fitness-Verknüpfung ----
+   Verknüpft wird AUSSCHLIESSLICH der Habit, bei dem im Editor der Schalter
+   "Mit Fitness verknüpfen" aktiv ist (fitnessLinked). Bei mehreren der älteste.
+   Nur AUTOMATISCH gesetzte Haken (autoFitness:true) werden beim Löschen des
+   letzten Eintrags wieder entfernt – manuell gesetzte bleiben. */
+function findSportHabit(habits){
+  habits = habits || [];
+  const linked = habits.filter(function(h){ return h && h.fitnessLinked; })
+                       .sort(function(a,b){ return (a.order||0)-(b.order||0); });
+  return linked[0] || null;
+}
+async function syncSportHabitForDate(date){
+  if(!date) return;
+  const sport = findSportHabit(await habitsAll());
+  if(!sport) return;
+  const hasWorkout = (await db.getAll('workouts')).some(w => w.date === date);
+  const log = await db.get('habitLogs', habitLogKey(sport.id, date));
+  const isDone = log && (sport.htype==='quantity' ? logComplete(sport,log) : !!log.done);
+  if(hasWorkout){
+    // Mind. ein Training an diesem Tag → abhaken, falls noch nicht gesetzt (Herkunft: Fitness).
+    if(!isDone){
+      if(sport.htype==='quantity') await setHabitLog(sport,date,{ value:(+sport.target||1), skipped:false, autoFitness:true });
+      else await setHabitLog(sport,date,{ done:true, skipped:false, autoFitness:true });
+    }
+  } else {
+    // Kein Training mehr an diesem Tag → Haken nur entfernen, wenn er automatisch kam.
+    if(isDone && log && log.autoFitness){
+      if(sport.htype==='quantity') await setHabitLog(sport,date,{ value:0, autoFitness:false });
+      else await setHabitLog(sport,date,{ done:false, autoFitness:false });
+    }
+  }
+}
+/* Trägt rückwirkend ALLE bisherigen Trainingstage im verknüpften Sport-Habit nach.
+   Nur für den EXPLIZIT verknüpften Habit (kein Massen-Abhaken per Heuristik).
+   Lässt jeden Tag in Ruhe, an dem du schon manuell etwas gesetzt/entfernt hast
+   (es wird nur abgehakt, wo noch gar kein Eintrag für diesen Tag existiert). */
+async function backfillSportHabit(){
+  const sport = (await habitsAll()).find(function(h){ return h && h.fitnessLinked; });
+  if(!sport) return;
+  const [workouts, logs] = await Promise.all([db.getAll('workouts'), habitLogsAll()]);
+  const have = new Set(logs.map(function(l){ return l.id; })); // id = habitId__date
+  const dates = Array.from(new Set(workouts.map(function(w){ return w.date; }).filter(Boolean)));
+  for(const date of dates){
+    if(!have.has(habitLogKey(sport.id, date))){
+      if(sport.htype==='quantity') await setHabitLog(sport,date,{ value:(+sport.target||1), skipped:false, autoFitness:true });
+      else await setHabitLog(sport,date,{ done:true, skipped:false, autoFitness:true });
+    }
+  }
 }
 
 /* ---- Streaks & Statistik ---- */
@@ -8443,6 +8503,7 @@ async function openHabitModal(editId){
     habitState.pickColor=h.color||'green';
     habitState.pickWeekdays=(h.weekdays&&h.weekdays.length)?h.weekdays.slice():[0,1,2,3,4];
     setHabitType(h.htype||'binary'); setHabitSchedule(h.schedule==='weekly'?'monthly':(h.schedule||'daily'));
+    document.getElementById('habitFitnessLink').checked = !!h.fitnessLinked;
     document.getElementById('habitDeleteBtn').style.display='';
   } else {
     document.getElementById('habitModalTitle').textContent='Neuer Habit';
@@ -8454,6 +8515,7 @@ async function openHabitModal(editId){
     cat.value='Gesundheit';
     habitState.pickColor='green'; habitState.pickWeekdays=[0,1,2,3,4];
     setHabitType('binary'); setHabitSchedule('daily');
+    document.getElementById('habitFitnessLink').checked = false;
     document.getElementById('habitDeleteBtn').style.display='none';
   }
   renderHabitColorPicker(); renderHabitWeekdayPicker();
@@ -8477,8 +8539,16 @@ async function saveHabitModal(){
   h.monthlyTarget=schedule==='monthly'?Math.min(31,Math.max(1,parseInt(document.getElementById('habitMonthlyTarget').value,10)||10)):null;
   h.weeklyTarget=null;
   h.category=document.getElementById('habitCategory').value;
+  h.fitnessLinked=document.getElementById('habitFitnessLink').checked;
   if(schedule==='weekdays' && !h.weekdays.length){ toast('Mindestens einen Wochentag wählen','danger'); return; }
   await db.save('habits',h);
+  if(h.fitnessLinked){
+    // Exklusiv: nur EIN Habit darf mit Fitness verknüpft sein → bei allen anderen abschalten.
+    const others=(await habitsAll()).filter(function(x){ return x.id!==h.id && x.fitnessLinked; });
+    for(const o of others){ o.fitnessLinked=false; await db.save('habits',o); }
+    // Rückwirkend alle bisherigen Trainingstage abhaken.
+    await backfillSportHabit();
+  }
   closeLifeModal();
   toast(habitState.editingId?'Habit aktualisiert':'Habit angelegt','success');
   habitState.editingId=null;
@@ -12978,10 +13048,12 @@ async function quickAddWorkout() {
   if (!sport) { toast('Sportart wählen', 'danger'); return; }
   if (!duration || duration <= 0) { toast('Dauer in Minuten angeben', 'danger'); return; }
   await db.save('workouts', { id: crypto.randomUUID(), date, sport, duration, rpe: rpe ? +rpe : null });
+  await syncSportHabitForDate(date);
   document.getElementById('fqDuration').value = '';
   document.getElementById('fqRpe').value = '';
   toast('Training erfasst', 'success');
   await refreshFit();
+  await refreshHabitSurfaces();
 }
 function openWorkoutModal(id) {
   fitnessState.editingId = id || null;
@@ -13017,6 +13089,7 @@ async function saveWorkout() {
   if (!duration || duration <= 0) { toast('Dauer in Minuten angeben', 'danger'); return; }
   const rpe = document.getElementById('wkRpe').value;
   const distance = document.getElementById('wkDistance').value;
+  const oldDate = fitnessState.editingId ? ((await db.get('workouts', fitnessState.editingId)) || {}).date : null;
   const w = {
     id: fitnessState.editingId || crypto.randomUUID(),
     date, sport, duration,
@@ -13027,17 +13100,23 @@ async function saveWorkout() {
     tags: parseTags(document.getElementById('wkTags').value)
   };
   await db.save('workouts', w);
+  await syncSportHabitForDate(date);
+  if (oldDate && oldDate !== date) await syncSportHabitForDate(oldDate);
   closeLifeModal();
   toast('Training gespeichert', 'success');
   await refreshFit();
+  await refreshHabitSurfaces();
 }
 async function deleteWorkout() {
   if (!fitnessState.editingId) return;
   if (!await lifeConfirm('Diese Trainingseinheit wirklich löschen?')) return;
+  const delDate = ((await db.get('workouts', fitnessState.editingId)) || {}).date;
   await db.delete('workouts', fitnessState.editingId);
+  await syncSportHabitForDate(delDate);
   closeLifeModal();
   toast('Training gelöscht');
   await refreshFit();
+  await refreshHabitSurfaces();
 }
 
 /* ---------- Body weight (change-points, forward-filled) ---------- */
@@ -16192,6 +16271,7 @@ document.addEventListener('click', (e) => {
   await loadSettings();
   ensureStickyTabs();
   await seedDefaultHabitsIfNeeded();
+  await backfillSportHabit();
   const today = new Date();
   miniCalView.year = today.getFullYear();
   miniCalView.month = today.getMonth();
