@@ -15411,7 +15411,7 @@ function bodyAxisTicks(start, end, period) {
      =================================================================== */
   function vocLoadProg() { try { return JSON.parse(localStorage.getItem(VOC_PROG_KEY)) || {}; } catch(e){ return {}; } }
   function vocSaveProg(p) { try { localStorage.setItem(VOC_PROG_KEY, JSON.stringify(p)); } catch(e){} }
-  function vocLoadRel() { try { const r = JSON.parse(localStorage.getItem(VOC_REL_KEY)); if (r && Array.isArray(r.keys)) return { date: r.date || "", added: r.added || 0, keys: r.keys }; } catch(e){} return { date:"", added:0, keys:[] }; }
+  function vocLoadRel() { try { const r = JSON.parse(localStorage.getItem(VOC_REL_KEY)); if (r && Array.isArray(r.keys)) return { date: r.date || "", filledDate: r.filledDate || "", added: r.added || 0, keys: r.keys }; } catch(e){} return { date:"", filledDate:"", added:0, keys:[] }; }
   function vocSaveRel(r) { try { localStorage.setItem(VOC_REL_KEY, JSON.stringify(r)); } catch(e){} }
   function vocReleasedSet() { return new Set(vocLoadRel().keys); }
   // Tägliche Freigabe: füllt "Neu/Offen" GENAU EINMAL pro Kalendertag um bis zu 20 auf, gedeckelt bei 100.
@@ -15420,26 +15420,27 @@ function bodyAxisTicks(start, end, period) {
   function ensureDailyRelease() {
     const today = todayISO();
     let rel = vocLoadRel();
-    // Tagesbudget: pro Kalendertag max. VOC_DAILY_ADD Freigaben. Wurde heute schon
-    // teilweise freigegeben, darf bis zum Budget noch aufgefüllt werden (sofortiges
-    // Nachholen) – aber kein endloses Nachrücken: ist das Budget aufgebraucht, erst morgen.
-    const usedToday = (rel.date === today) ? (rel.added || 0) : 0;
-    const dailyBudget = VOC_DAILY_ADD - usedToday;
-    const relSet = new Set(rel.keys || []);
-    if (dailyBudget <= 0) return;
+    // Einmal pro Kalendertag auf den Cap (100 offene) auffüllen. KEIN Nachrücken untertags:
+    // lernst du untertags Vokabeln, werden die Plätze NICHT sofort nachbesetzt – erst die
+    // Auffüllung am nächsten Tag holt aus der Warteschlange nach.
+    if (rel.filledDate === today) return;
+    // Aber erst auffüllen, wenn die heutigen neuen Vokabeln verfügbar sind (kommen nachts ~2:50–3:00).
+    // Fallback: ist das Fenster vorbei und kam nichts Neues, trotzdem aus der Warteschlange auffüllen.
+    const todayBatchHere = !!(AG.voc && Array.isArray(AG.voc.days) && AG.voc.days.some(function (d) { return agDateOnly(d.date) === today; }));
+    if (!todayBatchHere && !agSourceDue('voc')) return;
     const prog = vocLoadProg();
+    const relSet = new Set(rel.keys || []);
     let open = 0;
     vocAllWords().forEach(function (w) { if (relSet.has(w.key) && boxOf(prog[w.key]) === 0) open++; });
-    let toRelease = Math.min(dailyBudget, VOC_OPEN_CAP - open);
-    let added = 0;
+    let toRelease = VOC_OPEN_CAP - open;
     if (toRelease > 0) {
       const ordered = vocAllWordsOldestFirst();
       for (let i = 0; i < ordered.length && toRelease > 0; i++) {
         const w = ordered[i];
-        if (!relSet.has(w.key) && boxOf(prog[w.key]) === 0) { relSet.add(w.key); added++; toRelease--; }
+        if (!relSet.has(w.key) && boxOf(prog[w.key]) === 0) { relSet.add(w.key); toRelease--; }
       }
     }
-    vocSaveRel({ date: today, added: usedToday + added, keys: Array.from(relSet) });
+    vocSaveRel({ date: today, filledDate: today, keys: Array.from(relSet) });
   }
   function vocDaysSorted() { return AG.voc ? AG.voc.days.slice().sort(function(a,b){ return b.date.localeCompare(a.date); }) : []; }
   function vocAllWords() {
