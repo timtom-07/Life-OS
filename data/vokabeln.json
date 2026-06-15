@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-14",
+  "updated": "2026-06-15",
   "days": [
     { "date": "2026-06-12", "words": [
       { "word": "die Belastbarkeit", "pos": "Substantiv, die", "def": "resilience; robustness", "ex": "The team showed remarkable resilience under pressure." },
@@ -66,6 +66,28 @@
       { "word": "einbüßen", "pos": "Verb", "def": "to lose; to forfeit", "ex": "The firm risked losing its competitive advantage if it failed to innovate." },
       { "word": "die Spanne", "pos": "Substantiv, die", "def": "margin; range; span", "ex": "Profit margins narrowed considerably due to rising costs." },
       { "word": "unzulänglich", "pos": "Adjektiv", "def": "inadequate; insufficient", "ex": "The existing infrastructure proved inadequate for the company's growth." }
+    ] },
+    { "date": "2026-06-15", "words": [
+      { "word": "die Risikobereitschaft", "pos": "Substantiv, die", "def": "risk appetite; willingness to take risks", "ex": "Investors' risk appetite increased noticeably after the market rebound." },
+      { "word": "die Verbindlichkeit", "pos": "Substantiv, die", "def": "liability; commitment; obligation", "ex": "The company recorded substantial liabilities on its balance sheet." },
+      { "word": "der Vorstoß", "pos": "Substantiv, der", "def": "initiative; move; push", "ex": "The CEO's bold push into emerging markets paid off within two years." },
+      { "word": "die Tragkraft", "pos": "Substantiv, die", "def": "capacity; load-bearing capacity", "ex": "Engineers reassessed the bridge's load-bearing capacity before approving heavier traffic." },
+      { "word": "die Verzahnung", "pos": "Substantiv, die", "def": "interlocking; integration; meshing", "ex": "Better integration between sales and production reduced delivery times." },
+      { "word": "die Aufschiebung", "pos": "Substantiv, die", "def": "postponement; deferral; procrastination", "ex": "Constant procrastination on key decisions left the project far behind schedule." },
+      { "word": "unermesslich", "pos": "Adjektiv", "def": "immense; immeasurable; vast", "ex": "The startup's potential market seemed almost immeasurable." },
+      { "word": "erschwinglich", "pos": "Adjektiv", "def": "affordable", "ex": "The new pricing model made the software affordable for small businesses." },
+      { "word": "die Stellschraube", "pos": "Substantiv, die", "def": "lever; adjustable factor; control knob", "ex": "Management identified several levers to cut operating costs." },
+      { "word": "die Tatkraft", "pos": "Substantiv, die", "def": "drive; energy; vigor", "ex": "Her drive and determination inspired the entire team." },
+      { "word": "die Aussichtslosigkeit", "pos": "Substantiv, die", "def": "hopelessness; futility", "ex": "A sense of futility spread through the office after the third failed pitch." },
+      { "word": "die Inanspruchnahme", "pos": "Substantiv, die", "def": "utilization; use; claim", "ex": "The utilization of the new service exceeded all forecasts." },
+      { "word": "einräumen", "pos": "Verb", "def": "to admit; to concede; to grant", "ex": "The director had to admit that the forecast had been overly optimistic." },
+      { "word": "die Glaubwürdigkeit", "pos": "Substantiv, die", "def": "credibility", "ex": "The scandal seriously damaged the brand's credibility." },
+      { "word": "der Anstoß", "pos": "Substantiv, der", "def": "impetus; trigger; catalyst", "ex": "The merger provided the impetus for a complete overhaul of the IT systems." },
+      { "word": "die Beeinträchtigung", "pos": "Substantiv, die", "def": "impairment; detriment; adverse effect", "ex": "The strike had a noticeable adverse effect on quarterly output." },
+      { "word": "zukunftsweisend", "pos": "Adjektiv", "def": "forward-looking; pioneering; groundbreaking", "ex": "The firm unveiled a pioneering approach to sustainable manufacturing." },
+      { "word": "die Zuversicht", "pos": "Substantiv, die", "def": "confidence; optimism", "ex": "Despite the setbacks, the team maintained a quiet confidence about the outcome." },
+      { "word": "die Abgrenzung", "pos": "Substantiv, die", "def": "delimitation; distinction; differentiation", "ex": "Clear differentiation between the two product lines avoided customer confusion." },
+      { "word": "die Veranlassung", "pos": "Substantiv, die", "def": "cause; initiation; instigation", "ex": "On his own initiative, he arranged for an independent audit of the accounts." }
     ] }
   ]
 }
