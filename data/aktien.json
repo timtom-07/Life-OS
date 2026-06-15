@@ -1,73 +1,81 @@
 {
-  "updated": "2026-06-12",
-  "dateLabel": "Freitag, 12. Juni 2026",
-  "generated": "2026-06-12T15:54:05+02:00",
+  "updated": "2026-06-15",
+  "dateLabel": "Montag, 15. Juni 2026",
+  "generated": "2026-06-15T12:07:33+02:00",
   "pdf": "./data/stocks-latest.pdf",
-  "summary": "Die Wall Street ist heute uneinheitlich: Hoffnungen auf ein baldiges US-Iran-Abkommen (Wiedereröffnung der Straße von Hormus) drücken die Ölpreise, während an der Nasdaq mit dem Debüt von SpaceX der mit rund 75 Mrd. USD größte Börsengang der Geschichte im Mittelpunkt steht.",
+  "summary": "Eine angekündigte Annäherung zwischen den USA und dem Iran (Wiedereröffnung der Straße von Hormus) löst eine globale Erleichterungsrally aus: US-Futures ziehen deutlich an (Nasdaq +2,1%, S&P 500 +1,3%) und die Ölpreise fallen auf ein Dreimonatstief, während morgen die zweitägige FOMC-Sitzung mit Zinsentscheid am Mittwoch beginnt.",
   "items": [
     {
       "ticker": "SPCX",
       "name": "SpaceX",
-      "changePct": 0.0,
+      "changePct": 19.3,
       "flag": "watch",
-      "flagLabel": "IPO-Debüt",
-      "note": "Erster Handelstag nach dem mit rund 75 Mrd. USD größten Börsengang der Geschichte (Bewertung ca. 1,77 Billionen USD); die starke Überzeichnung der Zeichnung spricht hypothetisch für mögliches weiteres Kurspotenzial in den ersten Handelstagen."
+      "flagLabel": "IPO-Momentum",
+      "note": "Nach dem Rekorddebüt am Freitag (Schlusskurs 161,11 USD, +19,3% gegenüber dem IPO-Preis von 135 USD) bleibt die Aktie im Fokus; eine für den 22. Juni erwartete Indexaufnahme könnte hypothetisch zusätzliche Nachfrage auslösen."
     },
     {
-      "ticker": "NVDA",
-      "name": "Nvidia",
-      "changePct": 2.2,
-      "flag": "buy",
-      "flagLabel": "Buy",
-      "note": "Der anhaltende KI-Chip-Boom treibt Nvidia weiter an; zusätzlich sorgen Berichte über Lieferungen neuer Hochleistungschips an Raumfahrtkunden wie SpaceX für positive Stimmung."
+      "ticker": "ROKU",
+      "name": "Roku",
+      "changePct": 20.1,
+      "flag": "watch",
+      "flagLabel": "M&A-Spekulation",
+      "note": "Berichte über mögliche Verkaufsgespräche mit einem US-Medienkonzern ließen die Aktie am Freitag um rund 20% steigen; Evercore hob das Kursziel auf 185 USD an, was hypothetisch weiteres Aufwärtspotenzial andeuten könnte."
     },
     {
-      "ticker": "ADBE",
-      "name": "Adobe",
-      "changePct": -5.5,
+      "ticker": "ASTS",
+      "name": "AST SpaceMobile",
+      "changePct": -15.5,
       "flag": "alert",
       "flagLabel": "Alert",
-      "note": "Trotz eines Gewinnsprungs im Q2 belasten der überraschende Abgang von CFO Dan Durn und ein um rund 500 Mio. USD gesenkter ARR-Ausblick den Kurs; mehrere Analysten haben ihre Kursziele bereits gesenkt."
+      "note": "Ein enttäuschendes Geschäftsupdate und eine Startanomalie beim Bluebird-7-Satelliten führten am Freitag zu einem Kursrutsch von 15,5%; Barclays senkte das Kursziel auf 60 USD, was kurzfristig auf weiteres Abwärtsrisiko hindeutet."
     },
     {
       "ticker": "RKLB",
       "name": "Rocket Lab",
-      "changePct": 9.3,
+      "changePct": -10.8,
       "flag": "watch",
-      "flagLabel": "Watch",
-      "note": "Die angekündigte Aufnahme in den Nasdaq-100 zum 22. Juni könnte zusätzliche Käufe durch Indexfonds auslösen und den jüngsten Höhenflug der Aktie weiter befeuern."
+      "flagLabel": "Index-Aufnahme",
+      "note": "Ein breiter Ausverkauf im Raumfahrtsektor nach dem SpaceX-Börsengang ließ die Aktie am Freitag rund 10,8% fallen; die für den 22. Juni angekündigte Aufnahme in den Nasdaq-100 könnte hypothetisch indexgetriebene Käufe und eine Erholung auslösen."
     },
     {
-      "ticker": "META",
-      "name": "Meta Platforms",
-      "changePct": -0.7,
+      "ticker": "AMZN",
+      "name": "Amazon",
+      "changePct": 1.6,
+      "flag": "buy",
+      "flagLabel": "Reddit-Hype",
+      "note": "Amazon führt aktuell den von der Reddit-Community gewählten WSB-2026-Index an, getragen von anhaltender Stärke bei AWS und im E-Commerce; die Aktie legte am Freitag um 1,6% zu."
+    },
+    {
+      "ticker": "XOM",
+      "name": "Exxon Mobil",
+      "changePct": -5.0,
+      "flag": "alert",
+      "flagLabel": "Alert",
+      "note": "Die Annäherung zwischen den USA und dem Iran sowie die Aussicht auf eine Wiedereröffnung der Straße von Hormuz ließen Ölpreise und Energiewerte am Freitag einbrechen (XOM -5,0%); hält die Entspannung an, droht hypothetisch weiterer Druck auf den Kurs."
+    },
+    {
+      "ticker": "DAL",
+      "name": "Delta Air Lines",
+      "changePct": 1.5,
+      "flag": "buy",
+      "flagLabel": "Buy",
+      "note": "Sinkende Ölpreise infolge der Iran-Entspannung senken die Treibstoffkosten der Fluggesellschaft; die Aktie markierte am Freitag mit +1,5% ein Allzeithoch, was hypothetisch für eine fortgesetzte Aufwärtsbewegung sprechen könnte."
+    },
+    {
+      "ticker": "JPM",
+      "name": "JPMorgan Chase",
+      "changePct": 2.3,
+      "flag": "watch",
+      "flagLabel": "FOMC-Watch",
+      "note": "Die Aktie legte am Freitag um 2,3% zu; die morgen beginnende zweitägige FOMC-Sitzung mit Zinsentscheid am Mittwoch könnte als Katalysator für Finanzwerte wirken, falls die Fed einen weniger restriktiven Ton anschlägt."
+    },
+    {
+      "ticker": "TSLA",
+      "name": "Tesla",
+      "changePct": 1.8,
       "flag": "hold",
       "flagLabel": "Hold",
-      "note": "Chinas Investitionsbehörde NDRC hat die geplante Übernahme des KI-Start-ups Manus blockiert, was geopolitische Risiken für Metas KI-Strategie zeigt; starke Q1-Zahlen (Umsatz +33% YoY) stützen den Kurs aber weiterhin."
-    },
-    {
-      "ticker": "HIMS",
-      "name": "Hims & Hers Health",
-      "changePct": 2.0,
-      "flag": "watch",
-      "flagLabel": "Reddit-Hype",
-      "note": "Die Anfang Juni abgeschlossene Übernahme der australischen Eucalyptus-Gruppe bringt über 850.000 neue Kunden und wird in der Reddit-Community als Wachstumstreiber gefeiert, nachdem die Aktie zuvor wegen schwacher Q1-Zahlen stark gefallen war."
-    },
-    {
-      "ticker": "PLTK",
-      "name": "Playtika",
-      "changePct": 2.8,
-      "flag": "buy",
-      "flagLabel": "Buy",
-      "note": "BofA hat Playtika auf 'Buy' mit Kursziel 6,50 USD hochgestuft; die laufende strategische Überprüfung (möglicher Verkauf) und das starke Wachstum der Direct-to-Consumer-Plattform Disney Solitaire (+62,8% YoY) treiben die Aktie."
-    },
-    {
-      "ticker": "NOK",
-      "name": "Nokia",
-      "changePct": 5.2,
-      "flag": "buy",
-      "flagLabel": "Buy",
-      "note": "Bank of America und JPMorgan haben ihre Kursziele für Nokia wegen der starken Position im KI-Netzwerkgeschäft deutlich angehoben, begleitet von zusätzlicher Aufmerksamkeit aus der Reddit/WSB-Community."
+      "note": "Die Aktie gewann am Freitag 1,8%, doch Analysten stellen angesichts des SpaceX-Börsengangs zunehmend die relative Attraktivität von Tesla infrage ('Buy SpaceX, Sell Tesla'); zudem sorgen Spekulationen über eine Fusion von SpaceX und Tesla für Unsicherheit."
     }
   ]
 }
