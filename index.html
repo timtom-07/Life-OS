@@ -15275,7 +15275,7 @@ function bodyAxisTicks(start, end, period) {
   const MIX_WEIGHT = [6, 5, 4, 3, 2, 1]; // index 0=neu .. 5=Box5
   const VOC_REL_KEY = "lifeos_vocab_release"; // freigegebene (offene) Vokabeln + letztes Freigabedatum
   const VOC_OPEN_CAP = 100;   // max. gleichzeitig offene Vokabeln
-  const VOC_DAILY_ADD = 20;   // max. neue Freigaben pro Tag
+  const VOC_DAILY_ADD = 100;  // max. neue Freigaben pro Tag (= Cap): alle verfügbaren bis 100 offene sofort
   const AG_MONTHS = ["Januar","Februar","M\u00E4rz","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"];
   const AG_WD = ["Mo","Di","Mi","Do","Fr","Sa","So"];
 
@@ -15420,12 +15420,17 @@ function bodyAxisTicks(start, end, period) {
   function ensureDailyRelease() {
     const today = todayISO();
     let rel = vocLoadRel();
-    if (rel.date === today) return; // heute schon freigegeben → erst morgen wieder prüfen
-    const prog = vocLoadProg();
+    // Tagesbudget: pro Kalendertag max. VOC_DAILY_ADD Freigaben. Wurde heute schon
+    // teilweise freigegeben, darf bis zum Budget noch aufgefüllt werden (sofortiges
+    // Nachholen) – aber kein endloses Nachrücken: ist das Budget aufgebraucht, erst morgen.
+    const usedToday = (rel.date === today) ? (rel.added || 0) : 0;
+    const dailyBudget = VOC_DAILY_ADD - usedToday;
     const relSet = new Set(rel.keys || []);
+    if (dailyBudget <= 0) return;
+    const prog = vocLoadProg();
     let open = 0;
     vocAllWords().forEach(function (w) { if (relSet.has(w.key) && boxOf(prog[w.key]) === 0) open++; });
-    let toRelease = Math.min(VOC_DAILY_ADD, VOC_OPEN_CAP - open);
+    let toRelease = Math.min(dailyBudget, VOC_OPEN_CAP - open);
     let added = 0;
     if (toRelease > 0) {
       const ordered = vocAllWordsOldestFirst();
@@ -15434,7 +15439,7 @@ function bodyAxisTicks(start, end, period) {
         if (!relSet.has(w.key) && boxOf(prog[w.key]) === 0) { relSet.add(w.key); added++; toRelease--; }
       }
     }
-    vocSaveRel({ date: today, added: added, keys: Array.from(relSet) });
+    vocSaveRel({ date: today, added: usedToday + added, keys: Array.from(relSet) });
   }
   function vocDaysSorted() { return AG.voc ? AG.voc.days.slice().sort(function(a,b){ return b.date.localeCompare(a.date); }) : []; }
   function vocAllWords() {
@@ -15615,7 +15620,7 @@ function bodyAxisTicks(start, end, period) {
   function vocQueueTotal() { const dm = vocDayMap(); let q = 0; Object.keys(dm).forEach(function (k){ q += dm[k].queue; }); return q; }
   function lernBodyHTML() {
     const q = vocQueueTotal();
-    const qline = q > 0 ? '<div class="ag-queue-line">\uD83D\uDD52 '+q+' Vokabel'+(q===1?"":"n")+' vorbereitet \u2013 werden t\u00E4glich (bis 20) freigeschaltet, sobald unter 100 offene.</div>' : "";
+    const qline = q > 0 ? '<div class="ag-queue-line">\uD83D\uDD52 '+q+' Vokabel'+(q===1?"":"n")+' vorbereitet \u2013 werden freigeschaltet, sobald unter 100 offene.</div>' : "";
     return vocCalGridHTML() + qline + '<div class="ag-cal-dayview">' + lernDayHTML() + "</div>";
   }
   function renderVocLernen() {
@@ -16066,9 +16071,9 @@ function bodyAxisTicks(start, end, period) {
       "</div>";
 
     // Leitner-Boxen (klickbar)
-    const words = vocAllWords(); const prog = vocLoadProg();
+    const words = vocAllWords(); const prog = vocLoadProg(); const rel = vocReleasedSet();
     const boxes = [0,0,0,0,0]; let neu = 0;
-    words.forEach(function (w){ const b = boxOf(prog[w.key]); if (b===0) neu++; else boxes[b-1]++; });
+    words.forEach(function (w){ const b = boxOf(prog[w.key]); if (b===0) { if (rel.has(w.key)) neu++; } else boxes[b-1]++; });
     const tiles = [{id:"neu",lbl:"Neu",n:neu}].concat([1,2,3,4,5].map(function (i){ return { id:String(i), lbl:"Box "+i, n:boxes[i-1] }; }));
     html += '<div class="ag-card" style="margin-top:18px;"><div class="ag-card-head"><div class="ag-card-title">Leitner-Boxen</div><div class="ag-meta">Kachel tippen \u00B7 Box 1 neu \u00B7 Box 5 gemeistert</div></div>' +
       '<div class="ag-box-grid">' + tiles.map(function (t) {
