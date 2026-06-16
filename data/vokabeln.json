@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-15",
+  "updated": "2026-06-16",
   "days": [
     { "date": "2026-06-12", "words": [
       { "word": "die Belastbarkeit", "pos": "Substantiv, die", "def": "resilience; robustness", "ex": "The team showed remarkable resilience under pressure." },
@@ -88,6 +88,28 @@
       { "word": "die Zuversicht", "pos": "Substantiv, die", "def": "confidence; optimism", "ex": "Despite the setbacks, the team maintained a quiet confidence about the outcome." },
       { "word": "die Abgrenzung", "pos": "Substantiv, die", "def": "delimitation; distinction; differentiation", "ex": "Clear differentiation between the two product lines avoided customer confusion." },
       { "word": "die Veranlassung", "pos": "Substantiv, die", "def": "cause; initiation; instigation", "ex": "On his own initiative, he arranged for an independent audit of the accounts." }
+    ] },
+    { "date": "2026-06-16", "words": [
+      { "word": "die Weitsicht", "pos": "Substantiv, die", "def": "far-sightedness; long-term vision", "ex": "The board credited the CEO's long-term vision for steering the company through the downturn." },
+      { "word": "der Rückschluss", "pos": "Substantiv, der", "def": "inference; conclusion", "ex": "Drawing hasty inferences from limited data led the team to the wrong strategy." },
+      { "word": "die Leistungsfähigkeit", "pos": "Substantiv, die", "def": "capacity; performance; efficiency", "ex": "Upgrading the servers substantially increased the system's overall capacity." },
+      { "word": "die Bestandsaufnahme", "pos": "Substantiv, die", "def": "stocktaking; audit; assessment", "ex": "A thorough audit of existing processes revealed several costly inefficiencies." },
+      { "word": "die Weichenstellung", "pos": "Substantiv, die", "def": "pivotal decision; setting the course", "ex": "The board's pivotal decision to divest the loss-making subsidiary proved prescient." },
+      { "word": "der Mehrwert", "pos": "Substantiv, der", "def": "added value", "ex": "The consultancy struggled to demonstrate genuine added value to its sceptical client." },
+      { "word": "die Überzeugungskraft", "pos": "Substantiv, die", "def": "persuasiveness; power of conviction", "ex": "Her exceptional persuasiveness won over even the most reluctant shareholders." },
+      { "word": "die Beständigkeit", "pos": "Substantiv, die", "def": "constancy; durability; stability", "ex": "Long-term stability in earnings was a key factor for institutional investors." },
+      { "word": "der Handlungsbedarf", "pos": "Substantiv, der", "def": "need for action", "ex": "The audit findings identified an urgent need for action in the compliance department." },
+      { "word": "die Ausgewogenheit", "pos": "Substantiv, die", "def": "balance; equilibrium", "ex": "A careful balance between innovation and fiscal prudence defines their corporate culture." },
+      { "word": "die Refinanzierung", "pos": "Substantiv, die", "def": "refinancing", "ex": "Refinancing the debt at a lower interest rate saved the firm several million euros." },
+      { "word": "die Schlüsselkompetenz", "pos": "Substantiv, die", "def": "core competence; key skill", "ex": "Adaptability has become the most coveted core competence in modern recruitment." },
+      { "word": "die Nachlässigkeit", "pos": "Substantiv, die", "def": "negligence; carelessness", "ex": "Negligence in quality control ultimately triggered a costly product recall." },
+      { "word": "die Transparenz", "pos": "Substantiv, die", "def": "transparency", "ex": "Greater transparency in financial reporting strengthened investor confidence considerably." },
+      { "word": "der Ermessensspielraum", "pos": "Substantiv, der", "def": "discretionary power; margin of discretion", "ex": "Line managers were given wide discretionary power when approving overtime requests." },
+      { "word": "die Rechenschaftspflicht", "pos": "Substantiv, die", "def": "accountability; obligation to account", "ex": "Clear lines of accountability are vital for sound corporate governance." },
+      { "word": "überbrücken", "pos": "Verb", "def": "to bridge; to span", "ex": "The short-term loan was designed to bridge the gap until the new contracts came in." },
+      { "word": "die Zielvereinbarung", "pos": "Substantiv, die", "def": "performance agreement; target agreement", "ex": "Annual performance agreements help align individual objectives with overall company strategy." },
+      { "word": "unweigerlich", "pos": "Adverb", "def": "inevitably; invariably", "ex": "Cost overruns inevitably erode the profit margin of any large infrastructure project." },
+      { "word": "die Abschreibung", "pos": "Substantiv, die", "def": "depreciation; write-off; amortisation", "ex": "The accelerated depreciation of machinery had a notable impact on the year-end tax liability." }
     ] }
   ]
 }
