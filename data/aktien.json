@@ -1,81 +1,81 @@
 {
-  "updated": "2026-06-15",
-  "dateLabel": "Montag, 15. Juni 2026",
-  "generated": "2026-06-15T12:07:33+02:00",
+  "updated": "2026-06-16",
+  "dateLabel": "Dienstag, 16. Juni 2026",
+  "generated": "2026-06-16T12:05:00+02:00",
   "pdf": "./data/stocks-latest.pdf",
-  "summary": "Eine angekündigte Annäherung zwischen den USA und dem Iran (Wiedereröffnung der Straße von Hormus) löst eine globale Erleichterungsrally aus: US-Futures ziehen deutlich an (Nasdaq +2,1%, S&P 500 +1,3%) und die Ölpreise fallen auf ein Dreimonatstief, während morgen die zweitägige FOMC-Sitzung mit Zinsentscheid am Mittwoch beginnt.",
+  "summary": "Der US-Iran-Friedensdeal hält Energietitel weiter unter Druck – Ölpreise bleiben schwach und belasten XOM sowie LEN. Gegenläufig setzt die KI-Tech-Welle mit NVDA an der Spitze ihre Aufwärtsbewegung fort, während der SpaceX-Kosmos (SPCX +10,6%, RKLB +6,7%) besonderes Anlegerinteresse genießt; der FOMC-Entscheid am Mittwoch gilt als nächster Richtungsweiser.",
   "items": [
+    {
+      "ticker": "NVDA",
+      "name": "Nvidia",
+      "changePct": 2.9,
+      "flag": "buy",
+      "flagLabel": "Buy",
+      "note": "Klarer KI-Leithammel: NVDA legt auf breiter Front zu, getragen von anhaltend hoher Datacenter-Nachfrage und starken Forward-Guidance-Signalen. Hypothetisch spricht der intakte Aufwärtstrend für weiteres Potenzial."
+    },
     {
       "ticker": "SPCX",
       "name": "SpaceX",
-      "changePct": 19.3,
+      "changePct": 10.6,
       "flag": "watch",
       "flagLabel": "IPO-Momentum",
-      "note": "Nach dem Rekorddebüt am Freitag (Schlusskurs 161,11 USD, +19,3% gegenüber dem IPO-Preis von 135 USD) bleibt die Aktie im Fokus; eine für den 22. Juni erwartete Indexaufnahme könnte hypothetisch zusätzliche Nachfrage auslösen."
-    },
-    {
-      "ticker": "ROKU",
-      "name": "Roku",
-      "changePct": 20.1,
-      "flag": "watch",
-      "flagLabel": "M&A-Spekulation",
-      "note": "Berichte über mögliche Verkaufsgespräche mit einem US-Medienkonzern ließen die Aktie am Freitag um rund 20% steigen; Evercore hob das Kursziel auf 185 USD an, was hypothetisch weiteres Aufwärtspotenzial andeuten könnte."
-    },
-    {
-      "ticker": "ASTS",
-      "name": "AST SpaceMobile",
-      "changePct": -15.5,
-      "flag": "alert",
-      "flagLabel": "Alert",
-      "note": "Ein enttäuschendes Geschäftsupdate und eine Startanomalie beim Bluebird-7-Satelliten führten am Freitag zu einem Kursrutsch von 15,5%; Barclays senkte das Kursziel auf 60 USD, was kurzfristig auf weiteres Abwärtsrisiko hindeutet."
+      "note": "SpaceX setzt die Post-IPO-Rally fort und springt am zweiten vollen Handelstag von 160,95 USD auf 177,99 USD – ein neues Allzeithoch (52W-Hoch: 179,43 USD). Der Hype ist ungebrochen, aber die hohe Bewertung erhöht hypothetisch das Korrekturrisiko."
     },
     {
       "ticker": "RKLB",
       "name": "Rocket Lab",
-      "changePct": -10.8,
+      "changePct": 6.7,
       "flag": "watch",
       "flagLabel": "Index-Aufnahme",
-      "note": "Ein breiter Ausverkauf im Raumfahrtsektor nach dem SpaceX-Börsengang ließ die Aktie am Freitag rund 10,8% fallen; die für den 22. Juni angekündigte Aufnahme in den Nasdaq-100 könnte hypothetisch indexgetriebene Käufe und eine Erholung auslösen."
-    },
-    {
-      "ticker": "AMZN",
-      "name": "Amazon",
-      "changePct": 1.6,
-      "flag": "buy",
-      "flagLabel": "Reddit-Hype",
-      "note": "Amazon führt aktuell den von der Reddit-Community gewählten WSB-2026-Index an, getragen von anhaltender Stärke bei AWS und im E-Commerce; die Aktie legte am Freitag um 1,6% zu."
-    },
-    {
-      "ticker": "XOM",
-      "name": "Exxon Mobil",
-      "changePct": -5.0,
-      "flag": "alert",
-      "flagLabel": "Alert",
-      "note": "Die Annäherung zwischen den USA und dem Iran sowie die Aussicht auf eine Wiedereröffnung der Straße von Hormuz ließen Ölpreise und Energiewerte am Freitag einbrechen (XOM -5,0%); hält die Entspannung an, droht hypothetisch weiterer Druck auf den Kurs."
-    },
-    {
-      "ticker": "DAL",
-      "name": "Delta Air Lines",
-      "changePct": 1.5,
-      "flag": "buy",
-      "flagLabel": "Buy",
-      "note": "Sinkende Ölpreise infolge der Iran-Entspannung senken die Treibstoffkosten der Fluggesellschaft; die Aktie markierte am Freitag mit +1,5% ein Allzeithoch, was hypothetisch für eine fortgesetzte Aufwärtsbewegung sprechen könnte."
-    },
-    {
-      "ticker": "JPM",
-      "name": "JPMorgan Chase",
-      "changePct": 2.3,
-      "flag": "watch",
-      "flagLabel": "FOMC-Watch",
-      "note": "Die Aktie legte am Freitag um 2,3% zu; die morgen beginnende zweitägige FOMC-Sitzung mit Zinsentscheid am Mittwoch könnte als Katalysator für Finanzwerte wirken, falls die Fed einen weniger restriktiven Ton anschlägt."
+      "note": "Rocket Lab erholt sich deutlich vom IPO-bedingten Abverkauf der Vorwoche (Schluss 109,25 USD). Die bevorstehende Aufnahme in den Nasdaq-100 am 22. Juni könnte hypothetisch indexgetriebene Käufe als Katalysator auslösen."
     },
     {
       "ticker": "TSLA",
       "name": "Tesla",
-      "changePct": 1.8,
+      "changePct": 2.4,
       "flag": "hold",
       "flagLabel": "Hold",
-      "note": "Die Aktie gewann am Freitag 1,8%, doch Analysten stellen angesichts des SpaceX-Börsengangs zunehmend die relative Attraktivität von Tesla infrage ('Buy SpaceX, Sell Tesla'); zudem sorgen Spekulationen über eine Fusion von SpaceX und Tesla für Unsicherheit."
+      "note": "Tesla profitiert von der allgemeinen Tech-Erholung, steht aber im Schatten des SpaceX-Börsengangs. Der FOMC-Entscheid am Mittwoch sowie die SpaceX/Tesla-Fusionsspekulationen sorgen für anhaltende Unsicherheit."
+    },
+    {
+      "ticker": "META",
+      "name": "Meta Platforms",
+      "changePct": 0.4,
+      "flag": "hold",
+      "flagLabel": "Hold",
+      "note": "Meta bewegt sich stabil im Aufwind des allgemeinen Tech-Runs, ohne heute eigene kursbewegliche Nachrichten zu liefern. Der Wert bleibt solide, aber hypothetisch unspektakulär."
+    },
+    {
+      "ticker": "AMD",
+      "name": "Advanced Micro Devices",
+      "changePct": 0.3,
+      "flag": "hold",
+      "flagLabel": "Hold",
+      "note": "AMD legt moderat zu, bleibt aber deutlich hinter dem Sektor-Leader Nvidia zurück. Ohne kurzfristigen Katalysator ist die Aktie hypothetisch neutral."
+    },
+    {
+      "ticker": "JPM",
+      "name": "JPMorgan Chase",
+      "changePct": 0.4,
+      "flag": "watch",
+      "flagLabel": "FOMC-Watch",
+      "note": "JPMorgan legt moderat zu (aktuell 319,40 USD). Der FOMC-Entscheid am Mittwoch ist der nächste entscheidende Kurstreiber – eine dovishere Signalgebung könnte Finanztitel hypothetisch beflügeln."
+    },
+    {
+      "ticker": "XOM",
+      "name": "Exxon Mobil",
+      "changePct": -3.5,
+      "flag": "alert",
+      "flagLabel": "Alert",
+      "note": "Die anhaltend schwachen Ölpreise infolge des Iran-Deals (Rohöl ~80 USD/Barrel) belasten Exxon weiter (141,77 USD, -3,46%). Solange die Entspannung anhält, drohen hypothetisch weitere Kursverluste im Energiesektor."
+    },
+    {
+      "ticker": "LEN",
+      "name": "Lennar",
+      "changePct": -4.5,
+      "flag": "alert",
+      "flagLabel": "Alert",
+      "note": "Trotz EPS-Beats (+5,6%) drücken ein Umsatzmiss (-5% YoY), ein gesenkter Ausblick und das Sell-Rating von BofA (Kursziel 84 USD) die Aktie auf ~90 USD. Hypothetisch bleiben Margenrisiken im Wohnungsbausektor bestehen."
     }
   ]
 }
