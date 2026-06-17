@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-16",
+  "updated": "2026-06-17",
   "days": [
     { "date": "2026-06-12", "words": [
       { "word": "die Belastbarkeit", "pos": "Substantiv, die", "def": "resilience; robustness", "ex": "The team showed remarkable resilience under pressure." },
@@ -110,6 +110,28 @@
       { "word": "die Zielvereinbarung", "pos": "Substantiv, die", "def": "performance agreement; target agreement", "ex": "Annual performance agreements help align individual objectives with overall company strategy." },
       { "word": "unweigerlich", "pos": "Adverb", "def": "inevitably; invariably", "ex": "Cost overruns inevitably erode the profit margin of any large infrastructure project." },
       { "word": "die Abschreibung", "pos": "Substantiv, die", "def": "depreciation; write-off; amortisation", "ex": "The accelerated depreciation of machinery had a notable impact on the year-end tax liability." }
+    ] },
+    { "date": "2026-06-17", "words": [
+      { "word": "die Sorgfaltspflicht", "pos": "Substantiv, die", "def": "duty of care; due diligence", "ex": "Conducting thorough due diligence is a legal duty of care before any major acquisition." },
+      { "word": "die Skalierbarkeit", "pos": "Substantiv, die", "def": "scalability", "ex": "Investors were particularly impressed by the scalability of the platform." },
+      { "word": "die Verlässlichkeit", "pos": "Substantiv, die", "def": "reliability; dependability", "ex": "Clients valued the firm's reliability above all other qualities." },
+      { "word": "unvoreingenommen", "pos": "Adjektiv", "def": "unbiased; impartial", "ex": "The arbitrator was expected to remain strictly impartial throughout the proceedings." },
+      { "word": "die Geschäftstüchtigkeit", "pos": "Substantiv, die", "def": "business acumen; commercial astuteness", "ex": "Her business acumen helped the startup secure a second round of funding." },
+      { "word": "die Auslastung", "pos": "Substantiv, die", "def": "utilization; capacity utilization", "ex": "Factory capacity utilization dropped sharply during the recession." },
+      { "word": "die Zahlungsfähigkeit", "pos": "Substantiv, die", "def": "solvency", "ex": "Auditors raised concerns about the company's solvency going into the new fiscal year." },
+      { "word": "die Wertschöpfung", "pos": "Substantiv, die", "def": "value creation", "ex": "The merger was justified primarily in terms of long-term value creation." },
+      { "word": "die Skepsis", "pos": "Substantiv, die", "def": "skepticism", "ex": "Widespread skepticism greeted the firm's ambitious growth forecast." },
+      { "word": "die Beharrlichkeit", "pos": "Substantiv, die", "def": "persistence; perseverance", "ex": "Only through sheer persistence did the team finally close the deal." },
+      { "word": "die Voreiligkeit", "pos": "Substantiv, die", "def": "hastiness; rashness", "ex": "The board later regretted the hastiness of its decision to expand abroad." },
+      { "word": "die Schwachstelle", "pos": "Substantiv, die", "def": "weakness; vulnerability; weak point", "ex": "The audit revealed a serious vulnerability in the company's internal controls." },
+      { "word": "die Aufrichtigkeit", "pos": "Substantiv, die", "def": "sincerity; candor", "ex": "Employees appreciated the manager's sincerity during the layoff announcement." },
+      { "word": "die Verschleppung", "pos": "Substantiv, die", "def": "delay; protraction; stalling", "ex": "Critics accused the ministry of deliberately stalling the reform process." },
+      { "word": "die Zurückhaltung", "pos": "Substantiv, die", "def": "reticence; restraint; reserve", "ex": "Investors showed considerable restraint despite the bullish forecasts." },
+      { "word": "die Stichhaltigkeit", "pos": "Substantiv, die", "def": "validity; soundness", "ex": "The judge questioned the soundness of the prosecution's argument." },
+      { "word": "die Konjunktur", "pos": "Substantiv, die", "def": "economic cycle; business climate", "ex": "A sluggish business climate forced many firms to postpone investment plans." },
+      { "word": "die Veräußerung", "pos": "Substantiv, die", "def": "disposal; divestiture; sale", "ex": "The divestiture of the loss-making division boosted the group's overall margin." },
+      { "word": "die Belegschaft", "pos": "Substantiv, die", "def": "workforce; staff", "ex": "Management consulted the entire workforce before announcing the restructuring." },
+      { "word": "die Kulanz", "pos": "Substantiv, die", "def": "goodwill gesture; leniency", "ex": "The airline offered a goodwill gesture to passengers affected by the delay." }
     ] }
   ]
 }
