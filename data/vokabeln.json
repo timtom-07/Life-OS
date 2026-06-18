@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-17",
+  "updated": "2026-06-18",
   "days": [
     { "date": "2026-06-12", "words": [
       { "word": "die Belastbarkeit", "pos": "Substantiv, die", "def": "resilience; robustness", "ex": "The team showed remarkable resilience under pressure." },
@@ -132,6 +132,28 @@
       { "word": "die Veräußerung", "pos": "Substantiv, die", "def": "disposal; divestiture; sale", "ex": "The divestiture of the loss-making division boosted the group's overall margin." },
       { "word": "die Belegschaft", "pos": "Substantiv, die", "def": "workforce; staff", "ex": "Management consulted the entire workforce before announcing the restructuring." },
       { "word": "die Kulanz", "pos": "Substantiv, die", "def": "goodwill gesture; leniency", "ex": "The airline offered a goodwill gesture to passengers affected by the delay." }
+    ] },
+    { "date": "2026-06-18", "words": [
+      { "word": "die Eigendynamik", "pos": "Substantiv, die", "def": "momentum; self-perpetuating dynamic", "ex": "Once layoffs began, the restructuring took on a momentum of its own that no one could fully control." },
+      { "word": "die Unwägbarkeit", "pos": "Substantiv, die", "def": "imponderable; uncertainty factor", "ex": "Currency fluctuations remained one of the biggest imponderables in the company's five-year plan." },
+      { "word": "die Anlaufphase", "pos": "Substantiv, die", "def": "start-up phase; initial phase", "ex": "The start-up phase of the joint venture proved more costly than either partner had expected." },
+      { "word": "der Sachzwang", "pos": "Substantiv, der", "def": "practical constraint; structural necessity", "ex": "Citing structural necessity, the minister defended the unpopular budget cuts." },
+      { "word": "die Verwässerung", "pos": "Substantiv, die", "def": "dilution", "ex": "The new round of financing resulted in significant dilution of the founders' equity stake." },
+      { "word": "die Bürokratisierung", "pos": "Substantiv, die", "def": "bureaucratization; red tape", "ex": "Growing bureaucratization within the agency slowed down even routine approvals." },
+      { "word": "die Trägheit", "pos": "Substantiv, die", "def": "inertia; sluggishness", "ex": "Organizational inertia made it difficult for the firm to respond to the sudden shift in consumer demand." },
+      { "word": "die Vereinheitlichung", "pos": "Substantiv, die", "def": "standardization; unification", "ex": "Standardization of the reporting templates across all subsidiaries saved the finance team countless hours." },
+      { "word": "die Anfälligkeit", "pos": "Substantiv, die", "def": "susceptibility; vulnerability", "ex": "The bank's heavy reliance on short-term funding increased its vulnerability to sudden liquidity shocks." },
+      { "word": "die Durchsetzungsfähigkeit", "pos": "Substantiv, die", "def": "assertiveness; ability to prevail", "ex": "Her assertiveness in board meetings often determined whether a proposal moved forward." },
+      { "word": "die Vernetzung", "pos": "Substantiv, die", "def": "interconnectedness; networking", "ex": "The growing interconnectedness of global supply chains made the entire industry vulnerable to a single disruption." },
+      { "word": "die Zwangslage", "pos": "Substantiv, die", "def": "predicament; plight", "ex": "Cut off from fresh credit, the firm found itself in a serious financial predicament." },
+      { "word": "der Kahlschlag", "pos": "Substantiv, der", "def": "drastic cutback; wholesale cuts", "ex": "The new management ordered drastic cutbacks across every non-essential department." },
+      { "word": "die Verschuldung", "pos": "Substantiv, die", "def": "indebtedness; level of debt", "ex": "Rising indebtedness among emerging-market firms raised concerns at the central bank." },
+      { "word": "die Sollbruchstelle", "pos": "Substantiv, die", "def": "breaking point; built-in weak spot", "ex": "Every supply contract needs a clearly defined breaking point in case of force majeure." },
+      { "word": "die Hemmschwelle", "pos": "Substantiv, die", "def": "inhibition threshold; psychological barrier", "ex": "Anonymous reporting channels lowered employees' psychological barrier to flagging misconduct." },
+      { "word": "vorantreiben", "pos": "Verb", "def": "to drive forward; to propel", "ex": "The new CFO was determined to drive forward the long-delayed digital transformation." },
+      { "word": "aushebeln", "pos": "Verb", "def": "to undermine; to circumvent", "ex": "Clever accounting practices effectively undermined the spirit of the new disclosure rules." },
+      { "word": "die Anpassungsfähigkeit", "pos": "Substantiv, die", "def": "adaptability", "ex": "Adaptability has become one of the most sought-after qualities in today's volatile job market." },
+      { "word": "unbeirrt", "pos": "Adjektiv", "def": "undeterred; unwavering", "ex": "Undeterred by three rejections, the founder secured funding on her fourth pitch." }
     ] }
   ]
 }
