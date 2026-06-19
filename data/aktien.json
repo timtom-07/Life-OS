@@ -1,81 +1,73 @@
 {
-  "updated": "2026-06-17",
-  "dateLabel": "Mittwoch, 17. Juni 2026",
-  "generated": "2026-06-17T12:10:00+02:00",
+  "updated": "2026-06-19",
+  "dateLabel": "Freitag, 19. Juni 2026",
+  "generated": "2026-06-19T12:08:00+02:00",
   "pdf": "./data/stocks-latest.pdf",
-  "summary": "Der Markt steht ganz im Zeichen der ersten Fed-Zinsentscheidung unter dem neuen Chairman Kevin Warsh (Bekanntgabe 20:00 Uhr MESZ) – Halbleiterwerte wie INTC, AMD und AVGO gerieten zuletzt unter Gewinnmitnahmen, während Finanzwerte wie JPM von der Sektorrotation profitierten. Die milliardenschwere SpaceX-Übernahme des KI-Start-ups Cursor sorgt für anhaltenden Hype, während fallende Ölpreise infolge der Hormuz-Öffnung den Energiesektor belasten.",
+  "summary": "Die US-Börsen bleiben heute wegen Juneteenth geschlossen – Basis sind die Schlusskurse vom 18. Juni, als ein Sektor-Sell-off bei IT-Dienstleistern (Accenture-Gewinnwarnung) auf eine Rally bei KI-Chip- und Speicherwerten traf, während der in Genf zur Unterzeichnung anstehende US-Iran-Friedensrahmen die Öl-Risikoprämie weiter abschmelzen lässt.",
   "items": [
     {
       "ticker": "NVDA",
       "name": "Nvidia",
-      "changePct": -2.4,
-      "flag": "hold",
-      "flagLabel": "Hold",
-      "note": "Nvidia gibt im Zuge von Gewinnmitnahmen im Halbleitersektor nach (Schlusskurs 207,41 USD), der grundsätzliche KI-Nachfragetrend bleibt aber intakt. Der Fed-Entscheid mit erster Pressekonferenz von Kevin Warsh am Abend könnte hypothetisch für neue Impulse sorgen."
+      "changePct": 3.0,
+      "flag": "buy",
+      "flagLabel": "Buy",
+      "note": "Nvidia legte am 18. Juni rund 3% zu (Schluss 210,69 USD) im Zuge einer Tech-Erholung und vertiefter TSMC-Kooperation bei KI-gestützter Chipfertigung. Die strukturelle KI-Nachfrage bleibt hypothetisch intakt."
     },
     {
-      "ticker": "AMD",
-      "name": "Advanced Micro Devices",
-      "changePct": -4.6,
-      "flag": "hold",
-      "flagLabel": "Hold",
-      "note": "AMD korrigiert nach der starken Rally der Vortage (Citigroup-Upgrade) deutlich (507,29 USD) – ein technischer Cooldown vor der Fed-Sitzung. Hypothetisch bleibt der Wert ohne neuen Katalysator vorerst neutral."
+      "ticker": "TSM",
+      "name": "Taiwan Semiconductor",
+      "changePct": 3.5,
+      "flag": "buy",
+      "flagLabel": "Buy",
+      "note": "TSMC gewann am 18. Juni rund 3,5% nach einer neuen Packaging-Partnerschaft mit Amkor in Arizona und vertiefter Nvidia-Kooperation in der Fertigung. Hypothetisch stärkt das die US-Expansionsstrategie und die langfristige Marktstellung."
     },
     {
-      "ticker": "INTC",
-      "name": "Intel",
-      "changePct": -6.4,
+      "ticker": "SNDK",
+      "name": "SanDisk",
+      "changePct": 10.5,
+      "flag": "buy",
+      "flagLabel": "Reddit-Hype",
+      "note": "SanDisk schoss am 18. Juni rund 10,5% nach oben, befeuert von einem extremen NAND/DRAM-Lieferengpass im KI-Speicherboom, einer Morgan-Stanley-Hochstufung und intensiver WallStreetBets-Aktivität. Hypothetisch bleibt die Aktie damit auch ein Volatilitäts- und Hype-Risiko."
+    },
+    {
+      "ticker": "ACN",
+      "name": "Accenture",
+      "changePct": -16.8,
+      "flag": "sell",
+      "flagLabel": "Sell",
+      "note": "Accenture brach am 18. Juni um rund 16,8% ein (Schluss 129,76 USD), nachdem der Iran-Konflikt das Nahost-Geschäft mit 400 Mio. USD belastete und der Ausblick deutlich gesenkt wurde. Citi und Morgan Stanley senkten ihre Kursziele weiter, was hypothetisch auf anhaltenden Abwärtsdruck hindeutet."
+    },
+    {
+      "ticker": "IBM",
+      "name": "IBM",
+      "changePct": -5.1,
       "flag": "alert",
       "flagLabel": "Alert",
-      "note": "Intel fällt weiter und bleibt mit einem KGV von über 118x deutlich teurer als der Sektor-Schnitt (rund 66x); MACD- und Volumensignale deuten auf anhaltenden Verkaufsdruck hin. Hypothetisch überwiegt kurzfristig das Abwärtsrisiko."
+      "note": "IBM fiel am 18. Juni rund 5,1%, mitgezogen vom Accenture-Schock im IT-Dienstleistungssektor sowie einer eigenen Studie, wonach 91% der Unternehmen ihre KI-Abhängigkeiten kaum durchblicken. Das hypothetische Risiko: Firmenkunden könnten geplante KI-Investitionen vorerst zurückstellen."
     },
     {
-      "ticker": "AVGO",
-      "name": "Broadcom",
-      "changePct": -3.0,
+      "ticker": "KR",
+      "name": "Kroger",
+      "changePct": -7.4,
       "flag": "hold",
       "flagLabel": "Hold",
-      "note": "Broadcom gibt im Zuge defensiver Umschichtungen vor der Fed-Sitzung nach, nachdem bereits Anfang Juni ein enttäuschender Ausblick belastet hatte. Hypothetisch bleibt der Wert bis zur Zinsentscheidung unter Druck, ohne dass sich das langfristige KI-Bild geändert hätte."
-    },
-    {
-      "ticker": "MU",
-      "name": "Micron Technology",
-      "changePct": -4.4,
-      "flag": "watch",
-      "flagLabel": "Earnings-Watch",
-      "note": "Micron verliert trotz strukturell starker KI-Speichernachfrage im Sog der allgemeinen Chip-Schwäche. Die anstehenden Quartalszahlen am 24. Juni könnten hypothetisch als Katalysator für eine Gegenbewegung wirken."
-    },
-    {
-      "ticker": "SPCX",
-      "name": "SpaceX",
-      "changePct": 4.8,
-      "flag": "watch",
-      "flagLabel": "Deal-Closing Q3",
-      "note": "SpaceX bestätigt die milliardenschwere Übernahme des KI-Coding-Start-ups Cursor (60 Mrd. USD) und überholt damit Amazon nach Marktkapitalisierung; WSB-Erwähnungen steigen um über 1000%. Hypothetisch bleibt der für Q3 2026 erwartete Deal-Abschluss ein weiterer Kurstreiber, die hohe Bewertung erhöht aber das Rückschlagrisiko."
-    },
-    {
-      "ticker": "RKLB",
-      "name": "Rocket Lab",
-      "changePct": -4.2,
-      "flag": "watch",
-      "flagLabel": "Nasdaq-100-Aufnahme",
-      "note": "Rocket Lab gibt im Rahmen branchenweiter Gewinnmitnahmen ab, bleibt aber auf Kurs für die Aufnahme in den Nasdaq-100 am 22. Juni. Hypothetisch könnte dieser Index-Trigger indexgetriebene Käufe auslösen."
+      "note": "Kroger verzeichnete am 18. Juni mit -7,4% den größten Tagesverlust seit fast fünf Jahren, obwohl der Umsatz die Erwartungen übertraf – der schwächere Ausblick enttäuschte. Hypothetisch bleibt das operative Geschäft stabil, weshalb die Reaktion als überzogen gelten könnte."
     },
     {
       "ticker": "JPM",
       "name": "JPMorgan Chase",
-      "changePct": 3.3,
-      "flag": "watch",
-      "flagLabel": "FOMC-Entscheid",
-      "note": "JPMorgan profitiert von der Rotation in Finanz- und Industriewerte. Der Fed-Zinsentscheid mit erster Pressekonferenz von Kevin Warsh um 20:00 Uhr (MESZ) ist heute der entscheidende Kurstreiber für den gesamten Bankensektor."
+      "changePct": -1.5,
+      "flag": "hold",
+      "flagLabel": "Hold",
+      "note": "JPMorgan gab am 18. Juni rund 1,5% ab, nachdem der von Fed-Chef Kevin Warsh geleitete hawkishe Zinsausblick (9 von 18 Mitgliedern erwarten eine Anhebung) die Vortagesrally auf Rekordniveau bremste. Hypothetisch handelt es sich um eine technische Konsolidierung ohne fundamentale Kehrtwende."
     },
     {
       "ticker": "XOM",
       "name": "Exxon Mobil",
-      "changePct": 0.7,
-      "flag": "hold",
-      "flagLabel": "Hold",
-      "note": "Exxon profitiert von einem Upgrade auf 'Buy' durch BofA (Kursziel 154 USD) und schließt trotz weiterhin schwacher Ölpreise infolge der Hormuz-Öffnung leicht im Plus. Hypothetisch bleibt das Bild gemischt, da fallende Rohölpreise dem Sektor mittelfristig entgegenstehen."
+      "changePct": -3.0,
+      "flag": "alert",
+      "flagLabel": "Alert",
+      "note": "Exxon verlor am 18. Juni rund 3%, da der ausgehandelte US-Iran-Friedensrahmen die Kriegsrisikoprämie im Ölpreis weiter abbaut. Die für heute (19. Juni) geplante offizielle Unterzeichnung in Genf könnte hypothetisch zusätzlichen Abwärtsdruck auf den Ölpreis und Energiewerte auslösen."
     }
   ]
 }
