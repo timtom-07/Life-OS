@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-18",
+  "updated": "2026-06-19",
   "days": [
     { "date": "2026-06-12", "words": [
       { "word": "die Belastbarkeit", "pos": "Substantiv, die", "def": "resilience; robustness", "ex": "The team showed remarkable resilience under pressure." },
@@ -154,6 +154,28 @@
       { "word": "aushebeln", "pos": "Verb", "def": "to undermine; to circumvent", "ex": "Clever accounting practices effectively undermined the spirit of the new disclosure rules." },
       { "word": "die Anpassungsfähigkeit", "pos": "Substantiv, die", "def": "adaptability", "ex": "Adaptability has become one of the most sought-after qualities in today's volatile job market." },
       { "word": "unbeirrt", "pos": "Adjektiv", "def": "undeterred; unwavering", "ex": "Undeterred by three rejections, the founder secured funding on her fourth pitch." }
+    ] },
+    { "date": "2026-06-19", "words": [
+      { "word": "die Bonität", "pos": "Substantiv, die", "def": "creditworthiness", "ex": "The bank reassessed the client's creditworthiness before extending further credit." },
+      { "word": "der Zahlungsverzug", "pos": "Substantiv, der", "def": "payment default; late payment", "ex": "Persistent late payment by several clients strained the company's cash flow." },
+      { "word": "die Risikostreuung", "pos": "Substantiv, die", "def": "risk diversification", "ex": "Risk diversification across multiple markets cushioned the fund against the downturn." },
+      { "word": "die Marktbereinigung", "pos": "Substantiv, die", "def": "market shakeout; market consolidation", "ex": "Analysts expect a painful market shakeout once the subsidies are phased out." },
+      { "word": "der Interessenkonflikt", "pos": "Substantiv, der", "def": "conflict of interest", "ex": "The board member recused himself to avoid any conflict of interest." },
+      { "word": "das Hemmnis", "pos": "Substantiv, das", "def": "impediment; obstacle", "ex": "Outdated regulations remain a significant impediment to digital innovation." },
+      { "word": "der Reibungsverlust", "pos": "Substantiv, der", "def": "friction loss; inefficiency", "ex": "Poor communication between departments caused considerable friction loss in the project." },
+      { "word": "die Vergütung", "pos": "Substantiv, die", "def": "remuneration; compensation", "ex": "Executive remuneration was tied directly to long-term performance targets." },
+      { "word": "die Haftung", "pos": "Substantiv, die", "def": "liability", "ex": "The contractor assumed full liability for any damage caused during construction." },
+      { "word": "der Kurswechsel", "pos": "Substantiv, der", "def": "change of course; policy shift", "ex": "The sudden change of course in pricing strategy caught competitors off guard." },
+      { "word": "die Marktdurchdringung", "pos": "Substantiv, die", "def": "market penetration", "ex": "Aggressive marketing accelerated the brand's market penetration in Southeast Asia." },
+      { "word": "die Streitbeilegung", "pos": "Substantiv, die", "def": "dispute resolution", "ex": "Both parties agreed to pursue arbitration as a faster means of dispute resolution." },
+      { "word": "die Erwartungshaltung", "pos": "Substantiv, die", "def": "sense of entitlement; mindset of expectation", "ex": "Years of guaranteed bonuses had created an unhealthy sense of entitlement among staff." },
+      { "word": "die Vorreiterrolle", "pos": "Substantiv, die", "def": "pioneering role; trailblazer role", "ex": "The firm took on a pioneering role in adopting renewable energy across its plants." },
+      { "word": "aufwiegen", "pos": "Verb", "def": "to offset; to outweigh", "ex": "The cost savings ultimately outweighed the initial investment in new machinery." },
+      { "word": "vorgreifen", "pos": "Verb", "def": "to preempt; to anticipate", "ex": "Management decided to preempt the regulator's findings by voluntarily disclosing the breach." },
+      { "word": "beschönigen", "pos": "Verb", "def": "to gloss over; to embellish", "ex": "The press release seemed to gloss over the severity of the production delays." },
+      { "word": "unnachgiebig", "pos": "Adjektiv", "def": "uncompromising; relentless", "ex": "She remained uncompromising in her demand for full transparency." },
+      { "word": "vertretbar", "pos": "Adjektiv", "def": "justifiable; defensible", "ex": "The board considered the layoffs justifiable given the steep decline in revenue." },
+      { "word": "gleichwohl", "pos": "Adverb", "def": "nevertheless; nonetheless", "ex": "The project ran over budget; nevertheless, it delivered the promised functionality on time." }
     ] }
   ]
 }
