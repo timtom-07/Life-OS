@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-19",
+  "updated": "2026-06-20",
   "days": [
     { "date": "2026-06-12", "words": [
       { "word": "die Belastbarkeit", "pos": "Substantiv, die", "def": "resilience; robustness", "ex": "The team showed remarkable resilience under pressure." },
@@ -176,6 +176,28 @@
       { "word": "unnachgiebig", "pos": "Adjektiv", "def": "uncompromising; relentless", "ex": "She remained uncompromising in her demand for full transparency." },
       { "word": "vertretbar", "pos": "Adjektiv", "def": "justifiable; defensible", "ex": "The board considered the layoffs justifiable given the steep decline in revenue." },
       { "word": "gleichwohl", "pos": "Adverb", "def": "nevertheless; nonetheless", "ex": "The project ran over budget; nevertheless, it delivered the promised functionality on time." }
+    ] },
+    { "date": "2026-06-20", "words": [
+      { "word": "die Marktmacht", "pos": "Substantiv, die", "def": "market power", "ex": "Regulators launched an investigation into the company's growing market power." },
+      { "word": "das Alleinstellungsmerkmal", "pos": "Substantiv, das", "def": "unique selling point; distinguishing feature", "ex": "The startup's unique selling point was its same-day delivery guarantee." },
+      { "word": "die Preisgestaltung", "pos": "Substantiv, die", "def": "pricing; price-setting", "ex": "Flexible pricing allowed the firm to adapt quickly to shifting demand." },
+      { "word": "die Wertminderung", "pos": "Substantiv, die", "def": "impairment; diminution in value", "ex": "The auditors recorded a significant impairment on the outdated machinery." },
+      { "word": "die Schadensbegrenzung", "pos": "Substantiv, die", "def": "damage limitation; damage control", "ex": "The PR team focused entirely on damage control after the leak." },
+      { "word": "die Zerschlagung", "pos": "Substantiv, die", "def": "breakup; dismantling", "ex": "Regulators threatened the breakup of the conglomerate over antitrust concerns." },
+      { "word": "die Vertragsstrafe", "pos": "Substantiv, die", "def": "contractual penalty; liquidated damages", "ex": "The supplier faced a hefty contractual penalty for the late delivery." },
+      { "word": "die Ausfallquote", "pos": "Substantiv, die", "def": "default rate; failure rate", "ex": "The bank's default rate on consumer loans rose sharply during the recession." },
+      { "word": "die Stellungnahme", "pos": "Substantiv, die", "def": "statement; position paper", "ex": "The ministry issued an official statement addressing the allegations." },
+      { "word": "die Aufsichtspflicht", "pos": "Substantiv, die", "def": "duty of supervision; oversight obligation", "ex": "The board failed in its duty of supervision over the subsidiary's finances." },
+      { "word": "der Kostendruck", "pos": "Substantiv, der", "def": "cost pressure", "ex": "Mounting cost pressure forced the airline to cut several routes." },
+      { "word": "die Marktsättigung", "pos": "Substantiv, die", "def": "market saturation", "ex": "Market saturation in the smartphone sector slowed growth for every major brand." },
+      { "word": "der Fachkräftemangel", "pos": "Substantiv, der", "def": "shortage of skilled workers; talent shortage", "ex": "The shortage of skilled workers delayed the factory's planned expansion." },
+      { "word": "vorbeugen", "pos": "Verb", "def": "to prevent; to take precautionary measures", "ex": "Regular audits help the company prevent compliance violations before they escalate." },
+      { "word": "verschleiern", "pos": "Verb", "def": "to obscure; to conceal; to disguise", "ex": "The report seemed designed to obscure the true scale of the losses." },
+      { "word": "aufbürden", "pos": "Verb", "def": "to burden someone with; to saddle someone with", "ex": "Senior management was reluctant to burden junior staff with the entire workload." },
+      { "word": "abfedern", "pos": "Verb", "def": "to cushion; to mitigate (an impact)", "ex": "The hedge was meant to cushion the fund against currency swings." },
+      { "word": "einvernehmlich", "pos": "Adjektiv", "def": "amicable; consensual; by mutual agreement", "ex": "Both parties reached an amicable settlement without going to court." },
+      { "word": "vielschichtig", "pos": "Adjektiv", "def": "multifaceted; complex; layered", "ex": "The merger raised a multifaceted set of legal and cultural challenges." },
+      { "word": "stichfest", "pos": "Adjektiv", "def": "watertight; airtight (of an argument)", "ex": "Her argument was watertight, leaving the opposing counsel with nothing to refute." }
     ] }
   ]
 }
