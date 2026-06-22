@@ -1,9 +1,9 @@
 {
-  "updated": "2026-06-19",
-  "dateLabel": "Freitag, 19. Juni 2026",
-  "generated": "2026-06-19T12:08:00+02:00",
+  "updated": "2026-06-22",
+  "dateLabel": "Montag, 22. Juni 2026",
+  "generated": "2026-06-22T12:12:00+02:00",
   "pdf": "./data/stocks-latest.pdf",
-  "summary": "Die US-Börsen bleiben heute wegen Juneteenth geschlossen – Basis sind die Schlusskurse vom 18. Juni, als ein Sektor-Sell-off bei IT-Dienstleistern (Accenture-Gewinnwarnung) auf eine Rally bei KI-Chip- und Speicherwerten traf, während der in Genf zur Unterzeichnung anstehende US-Iran-Friedensrahmen die Öl-Risikoprämie weiter abschmelzen lässt.",
+  "summary": "Vor der heutigen Wall-Street-Eröffnung (15:30 MESZ) zeigen die US-Futures leicht nachgebend, da Anleger auf die PCE-Inflationsdaten am Donnerstag warten und sich auf eine erntereiche Berichtswoche mit FedEx, Micron und Nike einstellen – Basis der folgenden Veränderungen bleibt daher der Schlusskurs vom 18. Juni, da der Freitag wegen Juneteenth handelsfrei war. Der fortschreitende US-Iran-Entspannungsprozess (aufgehobene Marineblockade, 60-Tage-Fahrplan zu einem Abkommen) drückt weiter auf die Ölpreise, während KI-Speicherchips erneut im Rampenlicht der Reddit-Community stehen.",
   "items": [
     {
       "ticker": "NVDA",
@@ -11,15 +11,23 @@
       "changePct": 3.0,
       "flag": "buy",
       "flagLabel": "Buy",
-      "note": "Nvidia legte am 18. Juni rund 3% zu (Schluss 210,69 USD) im Zuge einer Tech-Erholung und vertiefter TSMC-Kooperation bei KI-gestützter Chipfertigung. Die strukturelle KI-Nachfrage bleibt hypothetisch intakt."
+      "note": "Nvidia schloss am 18. Juni mit +3,0% bei 210,69 USD im Zuge einer breiten Tech-Erholung und vertiefter TSMC-Kooperation bei KI-Chipfertigung. Die strukturelle KI-Nachfrage bleibt hypothetisch der zentrale Kurstreiber."
     },
     {
-      "ticker": "TSM",
-      "name": "Taiwan Semiconductor",
-      "changePct": 3.5,
-      "flag": "buy",
-      "flagLabel": "Buy",
-      "note": "TSMC gewann am 18. Juni rund 3,5% nach einer neuen Packaging-Partnerschaft mit Amkor in Arizona und vertiefter Nvidia-Kooperation in der Fertigung. Hypothetisch stärkt das die US-Expansionsstrategie und die langfristige Marktstellung."
+      "ticker": "MU",
+      "name": "Micron Technology",
+      "changePct": 8.7,
+      "flag": "watch",
+      "flagLabel": "Watch",
+      "note": "Micron sprang am 18. Juni um rund 8,7% auf ein Rekordhoch (Schluss 1.133,99 USD), getragen von Analysten-Zielpreiserhöhungen und einer regelrechten Explosion der Erwähnungen auf r/wallstreetbets. Die Quartalszahlen am 24. Juni könnten hypothetisch als nächster Katalysator weiter nach oben wirken."
+    },
+    {
+      "ticker": "TSLA",
+      "name": "Tesla",
+      "changePct": -1.5,
+      "flag": "hold",
+      "flagLabel": "Hold",
+      "note": "Tesla gab am 18. Juni rund 1,5% ab (Schluss 394,32 USD), während Elon Musk seinen Anteil per Optionsausübung auf 19,9% erhöhte – ein potenziell bullishes Signal, dem eine schwedische Empfehlung gegen den FSD-Rollout und ein schleppender Robotaxi-Ausbau in Texas gegenüberstehen. Hypothetisch bleibt die Gemengelage uneinheitlich, daher vorerst abwarten."
     },
     {
       "ticker": "SNDK",
@@ -33,9 +41,9 @@
       "ticker": "ACN",
       "name": "Accenture",
       "changePct": -16.8,
-      "flag": "sell",
-      "flagLabel": "Sell",
-      "note": "Accenture brach am 18. Juni um rund 16,8% ein (Schluss 129,76 USD), nachdem der Iran-Konflikt das Nahost-Geschäft mit 400 Mio. USD belastete und der Ausblick deutlich gesenkt wurde. Citi und Morgan Stanley senkten ihre Kursziele weiter, was hypothetisch auf anhaltenden Abwärtsdruck hindeutet."
+      "flag": "hold",
+      "flagLabel": "Hold",
+      "note": "Accenture war am 18. Juni nach einer 400-Mio.-USD-Belastung im Nahost-Geschäft und einem gesenkten Ausblick um 16,8% eingebrochen (Schluss 129,76 USD). Nach diesem historischen Kurssturz dürfte ein Großteil der schlechten Nachrichten bereits eingepreist sein, auch wenn weitere Kurszielsenkungen hypothetisch möglich bleiben."
     },
     {
       "ticker": "IBM",
@@ -44,6 +52,14 @@
       "flag": "alert",
       "flagLabel": "Alert",
       "note": "IBM fiel am 18. Juni rund 5,1%, mitgezogen vom Accenture-Schock im IT-Dienstleistungssektor sowie einer eigenen Studie, wonach 91% der Unternehmen ihre KI-Abhängigkeiten kaum durchblicken. Das hypothetische Risiko: Firmenkunden könnten geplante KI-Investitionen vorerst zurückstellen."
+    },
+    {
+      "ticker": "XOM",
+      "name": "Exxon Mobil",
+      "changePct": -3.0,
+      "flag": "alert",
+      "flagLabel": "Alert",
+      "note": "Exxon verlor am 18. Juni rund 3%, da der fortschreitende US-Iran-Entspannungsprozess (aufgehobene Marineblockade, 60-Tage-Fahrplan zu einem Abkommen) die Kriegsrisikoprämie im Ölpreis weiter abbaut. Hypothetisch könnte sich der Abwärtsdruck auf Energiewerte fortsetzen, sollte die Entspannung weiter voranschreiten."
     },
     {
       "ticker": "KR",
@@ -59,15 +75,7 @@
       "changePct": -1.5,
       "flag": "hold",
       "flagLabel": "Hold",
-      "note": "JPMorgan gab am 18. Juni rund 1,5% ab, nachdem der von Fed-Chef Kevin Warsh geleitete hawkishe Zinsausblick (9 von 18 Mitgliedern erwarten eine Anhebung) die Vortagesrally auf Rekordniveau bremste. Hypothetisch handelt es sich um eine technische Konsolidierung ohne fundamentale Kehrtwende."
-    },
-    {
-      "ticker": "XOM",
-      "name": "Exxon Mobil",
-      "changePct": -3.0,
-      "flag": "alert",
-      "flagLabel": "Alert",
-      "note": "Exxon verlor am 18. Juni rund 3%, da der ausgehandelte US-Iran-Friedensrahmen die Kriegsrisikoprämie im Ölpreis weiter abbaut. Die für heute (19. Juni) geplante offizielle Unterzeichnung in Genf könnte hypothetisch zusätzlichen Abwärtsdruck auf den Ölpreis und Energiewerte auslösen."
+      "note": "JPMorgan gab am 18. Juni rund 1,5% ab, nachdem ein hawkisher Fed-Zinsausblick (9 von 18 Mitgliedern erwarten eine Anhebung) die Vortagesrally auf Rekordniveau bremste. Hypothetisch handelt es sich um eine technische Konsolidierung ohne fundamentale Kehrtwende."
     }
   ]
 }
